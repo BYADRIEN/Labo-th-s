@@ -71,10 +71,10 @@ Route::get('/home', [HomeController::class, 'homeindex'])->name('home');
 Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show');
 
 
-Route::get('/', function () {
-
-    $post = Post::first();
-    $post->comment('Hello, world!', user: Client::first());
-
-    return view('welcome');
-});
+//Route::get('/', function () {
+//
+//    $post = Post::first();
+//    $post->comment('Hello, world!', user: Client::first());
+//
+//    return view('welcome');
+//});

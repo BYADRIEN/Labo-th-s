@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use App\Models\User; // Modèle User
 use App\Models\Permission; // Modèle Permission
 use App\Models\Role; // Modèle Role
-// Ajoute d'autres modèles si nécessaire
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,28 +14,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Insérer des utilisateurs
-        User::insert([
-            ['name' => 'User1', 'email' => 'user1@example.com', 'password' => bcrypt('password')],
-            ['name' => 'User2', 'email' => 'user2@example.com', 'password' => bcrypt('password')],
-            // Ajoute d'autres utilisateurs ici
-        ]);
+        // User::insert([
+        //     ['name' => 'User1', 'email' => 'user1@example.com', 'password' => bcrypt('password')],
+        //     ['name' => 'User2', 'email' => 'user2@example.com', 'password' => bcrypt('password')],
+        // ]);
 
-        // Insérer des permissions
-        Permission::insert([
-            ['name' => 'view-posts', 'guard_name' => 'web'],
-            ['name' => 'edit-posts', 'guard_name' => 'web'],
-            // Ajoute d'autres permissions ici
-        ]);
+        // Permission::insert([
+        //     ['name' => 'view-posts', 'guard_name' => 'web'],
+        //     ['name' => 'edit-posts', 'guard_name' => 'web'],
+        // ]);
 
-        // Insérer des rôles
-        Role::insert([
-            ['name' => 'admin', 'guard_name' => 'web'],
-            ['name' => 'editor', 'guard_name' => 'web'],
-            // Ajoute d'autres rôles ici
-        ]);
+        // Role::insert([
+        //     ['name' => 'admin', 'guard_name' => 'web'],
+        //     ['name' => 'editor', 'guard_name' => 'web'],
+        // ]);
 
-        // Appelle d'autres seeders si tu en as
         // $this->call(OtherSeeder::class);
     }
 }

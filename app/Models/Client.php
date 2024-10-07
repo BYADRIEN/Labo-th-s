@@ -10,8 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Client extends Model implements Authenticatable
 {
-    use HasFactory, AuthenticatableTrait;
-    use HasRoles;
+    use HasFactory, AuthenticatableTrait, HasRoles;
 
     protected $table = 'client'; // Assurez-vous que le nom de votre table est correct ici
 
@@ -21,4 +20,8 @@ class Client extends Model implements Authenticatable
         'email',
         'password',
     ];
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'client_id'); // Assurez-vous que 'client_id' est la clé étrangère dans la table 'posts'
+    }
 }
