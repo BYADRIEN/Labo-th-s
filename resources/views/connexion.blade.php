@@ -15,4 +15,5 @@
 </div>
     <input type="submit" name="login" value="login">
 </form>
+<a href="{{ route('password.request') }}">Forget password</a>
 <a href="{{ route('about') }}">retour</a>

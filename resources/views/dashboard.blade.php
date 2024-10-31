@@ -6,7 +6,6 @@
 </head>
 <body>
 <h1>Welcome to the Dashboard</h1>
-<a href="{{ route('produits.create') }}">crée un produi</a>
 <!-- Si l'utilisateur est connecté -->
 @auth
     <button>Je suis connecté</button>

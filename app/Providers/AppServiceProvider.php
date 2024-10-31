@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
+use Laravel\Fortify\Fortify;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -25,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
         //
         View::share('global_var', 'Notre variable globale');
         Schema::defaultStringLength(191);
+        //Fortify::loginView(function () {
+        //    return view('auth.login');
+        //});
     }
 }

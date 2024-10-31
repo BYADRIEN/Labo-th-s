@@ -12,15 +12,13 @@ class CreateRolesTable extends Migration
         if (!Schema::hasTable('roles')) {
             Schema::create('roles', function (Blueprint $table) {
                 $table->id();
-                $table->string('name');
-                $table->string('guard_name');
+                $table->string('name', 255); // Limité à 255 caractères
+                $table->string('guard_name', 255); // Limité à 255 caractères
                 $table->timestamps();
+
+                // Ajout de la clé unique
+                $table->unique(['name', 'guard_name'], 'roles_name_guard_name_unique');
             });
         }
-    }
-
-    public function down()
-    {
-        Schema::dropIfExists('roles');
     }
 }
