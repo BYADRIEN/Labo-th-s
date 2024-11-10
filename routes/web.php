@@ -90,3 +90,5 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
 Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
 
+Route::get('password/reset/{token}/{email}', [PasswordResetLinkController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [PasswordResetLinkController::class, 'reset']);

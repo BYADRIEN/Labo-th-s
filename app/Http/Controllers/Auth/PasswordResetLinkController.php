@@ -38,4 +38,8 @@ class PasswordResetLinkController extends Controller
 
         return back()->withErrors(['email' => 'Email not found.']);
     }
+    public function showResetForm(Request $request, $token = null)
+    {
+        return view('auth.reset-password', ['token' => $token, 'email' => $request->email]);
+    }
 }

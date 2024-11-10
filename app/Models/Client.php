@@ -43,4 +43,8 @@ class Client extends Authenticatable implements MustVerifyEmail
             Log::error('Erreur lors de l\'envoi de la notification de réinitialisation de mot de passe : ' . $e->getMessage());
         }
     }
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
+    }
 }

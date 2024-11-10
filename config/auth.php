@@ -2,24 +2,28 @@
 
 return [
 
-'defaults' => [
-'guard' => 'client',  // Changer 'web' en 'client' si tu veux l'utiliser par défaut
-'passwords' => 'clients',  // Mettre à jour le reset password avec le provider 'clients'
-],
+    'defaults' => [
+        'guard' => 'client',  // Changer 'web' en 'client' si tu veux l'utiliser par défaut
+        'passwords' => 'clients',  // Mettre à jour le reset password avec le provider 'clients'
+    ],
 
-'guards' => [
-'client' => [  // Remplace 'web' par 'client'
-'driver' => 'session',
-'provider' => 'clients',  // Utilise le provider 'clients' que tu définiras plus bas
-],
-],
+    'guards' => [
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'clients', // Utiliser le même provider
+        ],
+    ],
 
-'providers' => [
-'clients' => [
-'driver' => 'eloquent',
-'model' => App\Models\Client::class,
-],
-],
+    'providers' => [
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
+        ],
+    ],
 
     'passwords' => [
         'clients' => [
@@ -30,8 +34,8 @@ return [
             'notify' => App\Notifications\ResetPasswordNotification::class, // Assurez-vous que cela pointe vers votre classe
         ],
 
-],
+    ],
 
-'password_timeout' => 10800,
+    'password_timeout' => 10800,
 
 ];
