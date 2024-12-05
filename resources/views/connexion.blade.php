@@ -17,3 +17,7 @@
 </form>
 <a href="{{ route('password.request') }}">Forget password</a>
 <a href="{{ route('about') }}">retour</a>
+<form method="POST" action="{{ route('verification.send') }}">
+    @csrf
+    <button type="submit">Renvoyer l'email de vérification</button>
+</form>

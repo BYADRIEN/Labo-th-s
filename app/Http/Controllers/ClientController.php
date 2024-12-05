@@ -20,29 +20,6 @@ class ClientController extends Controller {
         return view('connexion');
 
     }
-    //public function checklogin(Request $request)
-   // {
-        //$this->validate($request,[
-         //   'email'=>'required|email',
-        //    'password'=>'required',
-        //]);
-
-        //$user_data = array(
-        //    'email' => $request->get('email'),
-        //    'password' => $request->get('password')
-       // );
-
-        //if(Auth::attempt($user_data)){
-            //      return redirect()->route('client.successlogin');
-        //}
-    //    }
-    //    else{
-    //        return back()->with('error', 'Email ou mot de passe incorrect');
-    //    }
-    //}
-    //public function successlogin(){
-    //    return view ('successlogin');
-    //}
     public function loginPost(Request $request){
     $request->validate([
         "email"=>"required",
@@ -68,6 +45,17 @@ class ClientController extends Controller {
         $client->nom = $request->input('nom');
         $client->prenom = $request->input('prenom');
         $client->save();
+        $client->sendEmailVerificationNotification();
         return redirect('test/register')->with('status', 'Votre compte a bien été créé');
+        //return redirect()->route('verification.notice')->with('status', 'Inscription réussie ! Veuillez vérifier votre email.');
+    }
+    public function sendEmailVerificationNotification()
+    {
+        try {
+            $this->notify(new \Illuminate\Auth\Notifications\VerifyEmail());
+            \Log::info("Email de vérification envoyé à : " . $this->email);
+        } catch (\Exception $e) {
+            \Log::error("Erreur lors de l'envoi de l'email de vérification : " . $e->getMessage());
+        }
     }
 }

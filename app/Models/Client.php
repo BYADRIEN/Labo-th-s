@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Log; // Ajoutez cette ligne
+use Illuminate\Support\Facades\Log;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class Client extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, CanResetPassword;
+    use HasFactory, Notifiable, CanResetPassword, TwoFactorAuthenticatable;
 
     protected $table = 'client';
 
@@ -43,6 +44,7 @@ class Client extends Authenticatable implements MustVerifyEmail
             Log::error('Erreur lors de l\'envoi de la notification de réinitialisation de mot de passe : ' . $e->getMessage());
         }
     }
+
     public function getEmailForPasswordReset()
     {
         return $this->email;

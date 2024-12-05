@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Client; // Importez votre modèle Client
 use App\Actions\Fortify\CreateNewUser;
+use Laravel\Fortify\Contracts\ConfirmPasswordViewResponse;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
@@ -54,6 +55,23 @@ class FortifyServiceProvider extends ServiceProvider
         });
         Fortify::resetPasswordView(function ($request) {
             return view('auth.reset-password',['request' => $request]);
+        });
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
+        });
+        Fortify::confirmPasswordView(function () {
+            return view('auth.confirm-password'); // Assurez-vous que cette vue existe
+        });
+
+
+        // Enregistrez l'implémentation du contrat
+        $this->app->singleton(ConfirmPasswordViewResponse::class, function () {
+            return new class implements ConfirmPasswordViewResponse {
+                public function toResponse($request)
+                {
+                    return view('auth.confirm-password');
+                }
+            };
         });
     }
 }

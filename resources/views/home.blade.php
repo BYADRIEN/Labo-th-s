@@ -54,6 +54,20 @@
             </div>
         </div>
     </section>
+    <form method="POST" action="/user/two-factor-authentication">
+        @csrf
+        @if(auth()->user()->two_factor_secret)
+            @method('DELETE')
+
+            <div class="pb-5">
+                {!! auth()->user()->twoFactorQrCodeSvg() !!}
+            </div>
+
+            <button class="btn btn-danger">Disable</button>
+        @else
+            <button class="btn btn-primary">Enable</button>
+        @endif
+    </form>
     <section class="bg-success">
         <section class="bg-success p-5">
             <div class="container text-center text-white">
