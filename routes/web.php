@@ -67,4 +67,6 @@ use Laravel\Fortify\Fortify;
 
 //Fortify::routes();
 //Route::get('/home', [HomeController::class, 'homeindex'])->middleware('auth')->name('home');
+Route::view('/profil/edit','profile.edit')->middleware('auth');
+Route::view('/profil/password','profile.password')->middleware('auth');
 

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\User;
+use App\Models\Client; // Modifiez si nécessaire
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -10,49 +10,44 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
-    /**
-     * Validate and update the given user's profile information.
-     *
-     * @param  array<string, string>  $input
-     */
-    public function update(User $user, array $input): void
+    public function update(Client $client, array $input): void
     {
+        // Validation des données
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-
+            'nom' => ['required', 'string', 'max:255'],       // Validation pour `nom`
+            'prenom' => ['required', 'string', 'max:255'],   // Validation pour `prenom`
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($user->id),
+                Rule::unique('client')->ignore($client->id),
             ],
         ])->validateWithBag('updateProfileInformation');
 
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
-            $this->updateVerifiedUser($user, $input);
+        // Vérifiez si l'utilisateur doit confirmer son e-mail
+        if ($input['email'] !== $client->email &&
+            $client instanceof MustVerifyEmail) {
+            $this->updateVerifiedClient($client, $input);
         } else {
-            $user->forceFill([
-                'name' => $input['name'],
+            // Mise à jour des informations du client
+            $client->forceFill([
+                'nom' => $input['nom'],       // Mise à jour de la colonne `nom`
+                'prenom' => $input['prenom'], // Mise à jour de la colonne `prenom`
                 'email' => $input['email'],
             ])->save();
         }
     }
 
-    /**
-     * Update the given verified user's profile information.
-     *
-     * @param  array<string, string>  $input
-     */
-    protected function updateVerifiedUser(User $user, array $input): void
+    protected function updateVerifiedClient(Client $client, array $input): void
     {
-        $user->forceFill([
-            'name' => $input['name'],
+        $client->forceFill([
+            'nom' => $input['nom'],
+            'prenom' => $input['prenom'],
             'email' => $input['email'],
             'email_verified_at' => null,
         ])->save();
 
-        $user->sendEmailVerificationNotification();
+        $client->sendEmailVerificationNotification();
     }
 }
