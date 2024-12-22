@@ -9,7 +9,7 @@
         <p>{{ $post->content }}</p>
         <p>{{ $post->slug }}</p>
         <p>Publié le : {{ $post->created_at->format('d/m/Y') }}</p>
-
+        <p class="p-3 mb-2 bg-primary text-white">{{ $post->category->catname }}</p>
         <h2>Commentaires :</h2>
         @if($post->comments && $post->comments->count() > 0)
             <ul>
@@ -28,7 +28,8 @@
         @endif
     @endforeach
 @endsection
-
+comment
+like
 @section('footer')
     @include('components.footer')
 @endsection

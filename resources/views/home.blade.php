@@ -31,8 +31,8 @@
                                         <p>{{ $post->content }}</p>
                                         <p>{{ $post->slug }}</p>
                                         <p>Publié le : {{ $post->created_at->format('d/m/Y') }}</p>
-                                        <a class="text-white" href="{{ route('produits.show', $post->slug) }}">voir
-                                            l'article</a>
+                                        <a class="text-white" href="{{ route('produit.show', $post->slug) }}">voir l'article</a>
+
                                     </div>
                                 </div>
                             @endforeach
@@ -53,19 +53,19 @@
                 </div>
             </div>
         </div>
-    </section>
-    <form method="POST" action="/user/two-factor-authentication">
+    </section><form method="POST" action="/user/two-factor-authentication">
         @csrf
-        @if(auth()->user()->two_factor_secret)
+
+        @if(auth()->check() && auth()->user()->two_factor_secret)
             @method('DELETE')
 
             <div class="pb-5">
                 {!! auth()->user()->twoFactorQrCodeSvg() !!}
             </div>
 
-            <button class="btn btn-danger">Disable</button>
+            <button class="btn btn-danger">Désactiver</button>
         @else
-            <button class="btn btn-primary">Enable</button>
+            <button class="btn btn-primary">Activer</button>
         @endif
     </form>
     <section class="bg-success">

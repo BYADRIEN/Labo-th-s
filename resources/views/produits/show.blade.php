@@ -11,6 +11,6 @@
 <p>{{ $post->description }}</p>
 <p>Publié le : {{ $post->created_at->format('d/m/Y') }}</p>
 
-<a href="{{ route('home2') }}">Retour à la liste des posts</a>
+<a href="{{ route('home') }}">Retour à la liste des posts</a>
 </body>
 </html>

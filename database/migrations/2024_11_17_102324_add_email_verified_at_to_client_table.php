@@ -13,8 +13,10 @@ class AddEmailVerifiedAtToClientTable extends Migration
      */
     public function up()
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->timestamp('email_verified_at')->nullable();
+        Schema::table('client', function (Blueprint $table) {
+            if (!Schema::hasColumn('client', 'email_verified_at')) {
+                $table->timestamp('email_verified_at')->nullable();
+            }
         });
     }
 
@@ -26,7 +28,9 @@ class AddEmailVerifiedAtToClientTable extends Migration
     public function down()
     {
         Schema::table('client', function (Blueprint $table) {
-            $table->dropColumn('email_verified_at');
+            if (Schema::hasColumn('client', 'email_verified_at')) {
+                $table->dropColumn('email_verified_at');
+            }
         });
     }
 }
