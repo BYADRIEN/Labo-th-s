@@ -49,4 +49,7 @@ class Client extends Authenticatable implements MustVerifyEmail
     {
         return $this->email;
     }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

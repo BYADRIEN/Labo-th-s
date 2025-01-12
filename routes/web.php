@@ -70,3 +70,8 @@ use Laravel\Fortify\Fortify;
 Route::view('/profil/edit','profile.edit')->middleware('auth');
 Route::view('/profil/password','profile.password')->middleware('auth');
 
+//Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
+
+Route::post('{post}/comments','CommentsController@store');
+
+Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');

@@ -22,5 +22,12 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
+    public function path()
+    {
+        return url('posts/' . $this->id);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
