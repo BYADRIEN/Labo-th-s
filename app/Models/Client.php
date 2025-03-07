@@ -10,10 +10,12 @@ use App\Notifications\ResetPasswordNotification;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class Client extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, CanResetPassword, TwoFactorAuthenticatable;
+    use HasRoles;
 
     protected $table = 'client';
 
@@ -49,7 +51,19 @@ class Client extends Authenticatable implements MustVerifyEmail
     {
         return $this->email;
     }
-    public function comments(){
+
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Post::class, 'post_likes')->withTimestamps();
+    }
+
+    public function hasLiked(Post $post)
+    {
+        return $this->likes()->where('post_id', $post->id)->exists();
     }
 }

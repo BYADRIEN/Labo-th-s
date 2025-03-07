@@ -8,6 +8,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 // Page d'accueil publique
 Route::get('/', [HomeController::class, 'homeindex'])->name('home');
@@ -75,3 +77,4 @@ Route::view('/profil/password','profile.password')->middleware('auth');
 Route::post('{post}/comments','CommentsController@store');
 
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
+

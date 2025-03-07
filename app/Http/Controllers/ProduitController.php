@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
 //use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\PFVRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ProduitController extends Controller
 {
     //
-    public function index(){
-        // Récupérer tous les posts
-        $posts = Post::all();
+    public function index()
+    {
+        // Récupérer les posts avec le filtre 'title' et la relation 'category'
+        $posts = QueryBuilder::for(Post::class)
+            ->allowedFilters(['title','category.catname','categories.id'])
+            ->with('category')  // Charger la relation 'category' en même temps
+            ->get();
 
-
-        $posts = Post::with('category')->get();
+        // Récupérer toutes les catégories avec leurs posts
         $categories = Category::with('posts')->get();
-        // Passer la variable 'posts' à la vue 'produits.Products'
-        //return view('produits.Products', ['posts' => $posts]);
+
+        // Passer les variables à la vue
         return view('produits.Products', compact('posts', 'categories'));
     }
 
@@ -35,10 +40,14 @@ class ProduitController extends Controller
     public function insert(Request $request)
     {
         $posts = new Post;
+
         $posts->title = $request->input('title');
         $posts->content = $request->input('content');
         $posts->slug = $request->input('slug');
+        $posts->category_id = $request->input('category_id'); // Assurez-vous de recevoir une valeur pour category_id
+
         $posts->save();
+
         return redirect('produits');
     }
     public function edit($id){

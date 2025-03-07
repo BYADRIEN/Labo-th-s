@@ -1,24 +1,28 @@
-<!-- resources/views/dashboard.blade.php -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
+@extends('welcome')
 <h1>Welcome to the Dashboard</h1>
-<!-- Si l'utilisateur est connecté -->
-@auth
+
+@auth('client')
     <button>Je suis connecté</button>
 @else
     <button>Je ne suis pas connecté</button>
 @endauth
 
-<!-- Si l'utilisateur n'est pas connecté -->
-@guest
-    <button>Je ne suis pas connecté</button>
-@else
-    <button>Je suis connecté</button>
-@endguest
-<a href="{{ route('home') }}">retour</a>
-</body>
-</html>
+@role('admin')
+Je suis un admin
+<a href="">admin</a>
+@endrole
+
+@if(Auth::guard('client')->check())
+    {{ Auth::guard('client')->user()->name }}
+@endif
+{{ auth()->user()->nom }} {{ auth()->user()->prenom }}
+
+<p>New Post ( produits )</p>
+<p>Commentaires
+<p>Like</p>
+<p>informations du client</p>
+<p>user</p>
+<p>stock ?</p>
+
+<a href="{{ route('home') }}">Retour</a>
+

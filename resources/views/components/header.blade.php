@@ -27,6 +27,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+                {{ auth()->user()->nom }} {{ auth()->user()->prenom }}
             @else
                 <a class="text-white text-decoration-none" href="{{ route('login') }}">Se connecter</a>
                 <a class="text-white text-decoration-none" href="{{ route('client.register') }}">S'enregistrer</a>

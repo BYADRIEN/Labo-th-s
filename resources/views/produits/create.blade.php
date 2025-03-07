@@ -2,10 +2,14 @@
 
 <form action="{{ url('insert-data') }}" method="POST">
     @csrf
-    <label for="">Title</label>
-    <input class="form-control form-control-lg" type="text" name="title">
-    <label for="">Content</label>
-    <input class="form-control" type="text" name="content">
-    <button type="submit">créee le truc</button>
-    <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example" name="slug">
+    <input type="text" name="title" placeholder="Titre">
+    <textarea name="content" placeholder="Contenu"></textarea>
+    <input type="text" name="slug" placeholder="Slug">
+    <select name="category_id">
+        <!-- Liste des catégories -->
+        <option value="1">Catégorie 1</option>
+        <option value="2">Catégorie 2</option>
+    </select>
+    <button type="submit">Ajouter</button>
+    <a href="{{ route('produits') }}">Retour</a>
 </form>

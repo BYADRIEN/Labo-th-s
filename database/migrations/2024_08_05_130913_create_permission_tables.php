@@ -49,7 +49,17 @@ return new class extends Migration {
                 }
             });
         }
+        if (!Schema::hasTable($tableNames['role_has_permissions'])) {
+            Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($pivotRole, $pivotPermission) {
+                $table->unsignedBigInteger($pivotPermission);
+                $table->unsignedBigInteger($pivotRole);
 
+                $table->foreign($pivotPermission)->references('id')->on('permissions')->onDelete('cascade');
+                $table->foreign($pivotRole)->references('id')->on('roles')->onDelete('cascade');
+
+                $table->primary([$pivotPermission, $pivotRole]);
+            });
+        }
         // (Le reste de la migration reste inchangé)
 
     }
