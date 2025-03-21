@@ -25,4 +25,6 @@ Je suis un admin
 <p>stock ?</p>
 
 <a href="{{ route('home') }}">Retour</a>
+<a href="{{ route('profile.password') }}">modifier password</a>
+<a href="{{ route('profile.edit') }}">modifier compte</a>
 

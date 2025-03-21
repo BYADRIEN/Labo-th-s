@@ -37,7 +37,9 @@
                 <td><p>{{ $post->content }}</p></td>
                 <td><p>{{ $post->slug }}</p></td>
                 <td><p>Publié le : {{ $post->created_at->format('d/m/Y') }}</p></td>
-                <td><a href="{{ url('edit/' . $post->id) }}">Modifier</a></td>
+                <td><a href="{{ url('edit/' . $post->id) }}">Modifier</a>
+                    <a href="{{ url('delete/' . $post->id) }}">suprimer</a>
+                </td>
                 <td><p>{{ $post->category->catname }}</p></td>
                 <td><h2>Commentaires :</h2>
                     <div>
@@ -63,6 +65,9 @@
                 </td>
                 <td>
                     <livewire:like-button :key="$post->id" :$post/>
+                </td>
+                <td>
+                    {{ $post->stock }}
                 </td>
             </tr>
             </tbody>

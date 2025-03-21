@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('content');
             $table->text('category_id');
+            $table->text('stock');
             $table->timestamps();
         });
     }

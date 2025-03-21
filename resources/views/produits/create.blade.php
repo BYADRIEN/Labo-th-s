@@ -5,6 +5,7 @@
     <input type="text" name="title" placeholder="Titre">
     <textarea name="content" placeholder="Contenu"></textarea>
     <input type="text" name="slug" placeholder="Slug">
+    <input type="text" name="stock" placeholder="stock">
     <select name="category_id">
         <!-- Liste des catégories -->
         <option value="1">Catégorie 1</option>

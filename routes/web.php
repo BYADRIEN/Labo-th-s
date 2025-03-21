@@ -49,6 +49,7 @@ Route::post('insert-data', [ProduitController::class, 'insert'])->name('add');
 Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show');
 Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('produits.edit');
 Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+Route::get('delete/{id}', [ProduitController::class, 'delete'])->name('produits.delete');
 
 // À propos
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -69,8 +70,8 @@ use Laravel\Fortify\Fortify;
 
 //Fortify::routes();
 //Route::get('/home', [HomeController::class, 'homeindex'])->middleware('auth')->name('home');
-Route::view('/profil/edit','profile.edit')->middleware('auth');
-Route::view('/profil/password','profile.password')->middleware('auth');
+Route::view('/profil/edit','profile.edit')->middleware('auth')->name('profile.edit');
+Route::view('/profil/password','profile.password')->middleware('auth')->name('profile.password');
 
 //Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
 

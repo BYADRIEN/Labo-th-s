@@ -44,6 +44,7 @@ class ProduitController extends Controller
         $posts->title = $request->input('title');
         $posts->content = $request->input('content');
         $posts->slug = $request->input('slug');
+        $posts->stock = $request->input('stock');
         $posts->category_id = $request->input('category_id'); // Assurez-vous de recevoir une valeur pour category_id
 
         $posts->save();
@@ -72,5 +73,12 @@ class ProduitController extends Controller
         } else {
             return redirect()->route('produits')->with('error', 'Produit non trouvé.'); // Rediriger si le produit n'est pas trouvé
         }
+    }
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('produits');
+
     }
 }
