@@ -46,7 +46,7 @@ class ProduitController extends Controller
         $posts->slug = $request->input('slug');
         $posts->stock = $request->input('stock');
         $posts->price = $request->input('price');
-        $posts->img = $request->input('price');
+        $posts->img = $request->input('img');
         $posts->category_id = $request->input('category_id'); // Assurez-vous de recevoir une valeur pour category_id
 
         $posts->save();
