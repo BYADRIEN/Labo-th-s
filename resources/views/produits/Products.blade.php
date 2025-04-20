@@ -29,6 +29,7 @@
                 <th scope="col">Likes</th>
                 <th scope="col">stock</th>
                 <th scope="col">price</th>
+                <th scope="col">img</th>
             </tr>
             </thead>
             <tbody>
@@ -68,6 +69,12 @@
                 </td>
                 <td>
                     {{ $post->stock }}
+                </td>
+                <td>
+                    {{ $post->price }}
+                </td>
+                <td>
+                    {{ $post->img }}
                 </td>
             </tr>
             </tbody>

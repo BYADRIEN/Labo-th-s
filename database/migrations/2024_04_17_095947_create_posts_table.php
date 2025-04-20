@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('content');
             $table->text('category_id');
             $table->text('stock');
+            $table->text('price');
+            $table->text('img');
             $table->timestamps();
         });
     }

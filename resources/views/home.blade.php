@@ -13,7 +13,9 @@
         }
     </style>
     <section>
-        <img src="https://cdn.futura-sciences.com/sources/images/qr/aleatoire-interieur.jpg" alt="">
+        <div>
+            <img src="{{ asset('images/gtgtg.jpg') }}" alt="Mon image">
+        </div>
     </section>
     <section class="bg-success p-5">
         <div class="container text-center">

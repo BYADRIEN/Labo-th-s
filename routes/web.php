@@ -78,4 +78,7 @@ Route::view('/profil/password','profile.password')->middleware('auth')->name('pr
 Route::post('{post}/comments','CommentsController@store');
 
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
+use App\Http\Controllers\GalleryController;
+
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 

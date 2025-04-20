@@ -13,7 +13,7 @@
                     <a class="nav-link text-white" href="{{ route('produits') }}">Nos thés</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Gallerie</a>
+                    <a class="nav-link text-white" href="{{ route('gallery') }}">Gallerie</a>
                 </li>
             </ul>
         </div>

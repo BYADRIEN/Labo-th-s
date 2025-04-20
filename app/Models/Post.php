@@ -12,7 +12,7 @@ class Post extends Model
     use HasFactory;
     use HasComments;
     protected $table = 'posts'; // Remplacez 'nouveau_nom_de_table' par le nouveau nom de votre table
-    protected $fillable = ['title', 'slug', 'content', 'category_id', 'stock'];
+    protected $fillable = ['title', 'slug', 'content', 'category_id', 'stock', 'price', 'img'];
     // Relation avec les commentaires
     public function client()
     {
