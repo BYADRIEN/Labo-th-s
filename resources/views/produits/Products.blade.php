@@ -15,6 +15,12 @@
             @endforeach
         </select>
     </form>
+    <a href="{{ route('shopping.cart') }}">cart {{ count((array) session('cart')) }}</a>
+    @if(session('success'))
+        <div>
+         {{ session('success') }}
+        </div>
+    @endif
     @foreach($posts as $post)
         <table class="table">
             <thead>
@@ -30,6 +36,9 @@
                 <th scope="col">stock</th>
                 <th scope="col">price</th>
                 <th scope="col">img</th>
+                <th scope="col">poids</th>
+                <th scope="col">montant_tva</th>
+                <th scope="col">ajout à la commande</th>
             </tr>
             </thead>
             <tbody>
@@ -75,6 +84,22 @@
                 </td>
                 <td>
                     {{ $post->img }}
+                </td>
+                <td>
+                    {{ $post->poids }}
+                </td>
+                <td>
+                    {{ $post->montant_tva }}
+                </td>
+                <td>
+                    <form action="{{ route('wishlist.add', $post->id) }}" method="POST">
+                        @csrf
+                        <button type="submit">Ajouter à la wishlist</button>
+                    </form>
+                </td>
+                <td>
+                    <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
+                    <a class="text-danger" href="{{ url('checkout') }}">ajout au panier (0)</a>
                 </td>
             </tr>
             </tbody>

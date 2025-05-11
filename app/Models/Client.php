@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,10 +13,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class Client extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, CanResetPassword, TwoFactorAuthenticatable;
     use HasRoles;
+
 
     protected $table = 'client';
 
@@ -26,10 +29,10 @@ class Client extends Authenticatable implements MustVerifyEmail
         'password',
     ];
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'client_id');
-    }
+    //public function posts()
+    //{
+    //    return $this->hasMany(Post::class, 'client_id');
+    //}
 
     public function sendPasswordResetNotification($token)
     {
@@ -65,5 +68,20 @@ class Client extends Authenticatable implements MustVerifyEmail
     public function hasLiked(Post $post)
     {
         return $this->likes()->where('post_id', $post->id)->exists();
+    }
+
+    // App\Models\Client.php
+    //public function whishes()
+    //{
+    //    return $this->morphToMany(Post::class, 'wishable');
+   // }
+    //public function whishes()
+    //{
+    //    return $this->morphMany(Wishlist::class, 'wishable');
+    //}
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class, 'wishes') // 'wishes' est la table pivot
+        ->withPivot('uuid', 'user_id', 'wishable_type', 'wishable_id', 'scope');
     }
 }

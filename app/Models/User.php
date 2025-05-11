@@ -12,9 +12,12 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\CanResetPassword; // Assure-toi que cette ligne est présente
 use Illuminate\Auth\Passwords\CanResetPassword as ResetsPasswords; // Renomme le trait pour éviter les conflits
 
+
 class User extends Authenticatable implements MustVerifyEmail // Implémente l'interface
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, ResetsPasswords, TwoFactorAuthenticatable; // Utilise le trait
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, ResetsPasswords, TwoFactorAuthenticatable ; // Utilise le trait
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -48,5 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail // Implémente l'i
     ];
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+    public function ordre()
+    {
+       return $this->hasMany('App\order');
     }
 }

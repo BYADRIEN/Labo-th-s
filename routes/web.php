@@ -82,3 +82,19 @@ use App\Http\Controllers\GalleryController;
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
+Route::get('/test-wishlist', function () {
+    $user = \App\Models\User::first(); // Ou auth()->user() si t'es connecté
+    return $user->wishlist; // Doit retourner une collection (même vide)
+});
+// Routes pour la wishlist
+use App\Http\Controllers\WishlistController;
+use Tests\Fixtures\Controllers\ProductController;
+
+// Dans routes/web.php
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('/wishlist/add/{post}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::post('/wishlist/remove/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+
+Route::get('/produits/{id}', [ProduitController::class, 'addBooktoCart'])->name('addbook.to.cart');
+Route::get('shopping-cart', [ProduitController::class, 'bookCart'])->name('shopping.cart');
+Route::get('/checkout',[ProduitController::class,'checkout'])->name('checkout');

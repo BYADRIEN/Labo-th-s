@@ -8,6 +8,8 @@
     <input type="text" name="stock" placeholder="stock">
     <input type="text" name="price" placeholder="price">
     <input type="text" name="img" placeholder="img">
+    <input type="text" name="poids" placeholder="poids">
+    <input type="text" name="montant_tva" placeholder="montant_tva">
     <select name="category_id">
         <!-- Liste des catégories -->
         <option value="1">Catégorie 1</option>
