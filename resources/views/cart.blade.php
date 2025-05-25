@@ -1,10 +1,6 @@
+@extends('welcome')
+
 <p>ma commande</p>
-<pre>{{ print_r(session('cart'), true) }}</pre>
-@foreach(session('cart') as $id => $post)
-    {{ $post['title'] }}
-    {{ $post['price'] }}
-    {{ $post['img'] }}
-@endforeach
 @if(session('cart'))
     @foreach(session('cart') as $id => $post)
         <div>
@@ -16,12 +12,6 @@
 @else
     <p>Le panier est vide.</p>
 @endif
-@foreach(session('cart') as $id => $post)
-    {{ $post['title'] }}
-    {{ $post['price'] }}
-    {{ $post['img'] }}
-@endforeach
-<a href="{{ url('checkout') }}">valider la commande ( checkout )</a>
 <form action="{{ URL::to('checkout') }}">
     <input type="text" name="fullname" placeholder="fullname">
     <input type="text" name="phone" placeholder="phone">

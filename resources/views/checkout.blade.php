@@ -1,5 +1,4 @@
 <p>checkout ;)</p>
-<pre>{{ print_r(session('cart'), true) }}</pre>
 @foreach(session('cart') as $id => $post)
     {{ $post['title'] }}
     {{ $post['price'] }}

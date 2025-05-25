@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-body-sucess">
     <div class="container-fluid bg-success d-flex justify-content-between p-2">
         <a class="navbar-brand p-2" href="{{ route('home') }}">
-            <img src="https://img.freepik.com/psd-gratuit/logo-abstrait-degrade_23-2150689652.jpg?w=740&t=st=1722250868~exp=1722251468~hmac=7d6e92eb3cf81bc5e94be80b9caf865620c8b08a795254d2361c14dc78eaac66" alt="Bootstrap" width="50">
+           labo'h
         </a>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">

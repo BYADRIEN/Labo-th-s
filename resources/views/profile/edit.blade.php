@@ -1,3 +1,4 @@
+@extends('welcome')
 <h1>edit profile</h1>
 <form method="POST" action="{{ route('user-profile-information.update') }}">
     @csrf

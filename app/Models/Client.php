@@ -84,4 +84,8 @@ class Client extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Post::class, 'wishes') // 'wishes' est la table pivot
         ->withPivot('uuid', 'user_id', 'wishable_type', 'wishable_id', 'scope');
     }
+    public function commandes()
+    {
+        return $this->hasMany(\App\Models\Order::class, 'client_id'); // ou 'user_id' si la colonne est différente
+    }
 }

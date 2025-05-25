@@ -2,9 +2,12 @@
 @extends('components.header')
 @section('content')
     <h1>Liste de produits</h1>
-    <a class="bg-dark" href="{{ route('produits.create') }}">ajout d'un produit</a>
     <a href="">ajout d'une catégorie</a>
     <a href="">mes catégories</a>
+    <a href="{{ route('commandes') }}">mes commande</a>
+    <a href="{{ route('wishlist.index') }}">wishlist</a>
+    <a href="{{ route('roles.index') }}">Roles</a>
+    <a href="{{ route('permissions.index') }}">Permissions</a>
     <form method="GET">
         <select name="filter[category.catname]" onchange="this.form.submit()">
             <option value="">Tous les thés</option>
@@ -99,7 +102,6 @@
                 </td>
                 <td>
                     <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
-                    <a class="text-danger" href="{{ url('checkout') }}">ajout au panier (0)</a>
                 </td>
             </tr>
             </tbody>

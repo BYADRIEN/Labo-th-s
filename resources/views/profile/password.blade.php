@@ -1,3 +1,4 @@
+@extends('welcome')
 <h1>Change Password</h1>
 
 <form method="POST" action="{{ route('user-password.update') }}">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\HomeController;
@@ -44,8 +45,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Routes produits
 Route::get('/produits', [ProduitController::class, 'index'])->name('produits');
-Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create');
-Route::post('insert-data', [ProduitController::class, 'insert'])->name('add');
+Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create')->middleware('auth');
+Route::post('insert-data', [ProduitController::class, 'insert'])->name('add')->middleware('auth');
 Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show');
 Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('produits.edit');
 Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
@@ -95,6 +96,11 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.in
 Route::post('/wishlist/add/{post}', [WishlistController::class, 'add'])->name('wishlist.add');
 Route::post('/wishlist/remove/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
-Route::get('/produits/{id}', [ProduitController::class, 'addBooktoCart'])->name('addbook.to.cart');
+Route::get('/add-to-cart/{id}', [ProduitController::class, 'addBooktoCart'])->name('addbook.to.cart');
 Route::get('shopping-cart', [ProduitController::class, 'bookCart'])->name('shopping.cart');
 Route::get('/checkout',[ProduitController::class,'checkout'])->name('checkout');
+Route::get('/client/commandes',[ProduitController::class,'mescommandes'])->name('commandes');
+
+Route::resource('permissions', PermissionController::class);
+Route::resource('roles', \App\Http\Controllers\RoleController::class);
+//Route::resource('permissions/{permissionId}/delete', PermissionController::class,'destroy');

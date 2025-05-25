@@ -1,5 +1,4 @@
-<h1>test register</h1>
-
+@extends('welcome')
 
 <h1>Registration Form</h1>
 <form action='/test/traitement' method="post">
@@ -7,7 +6,7 @@
     <fieldset>
         <label>Enter Your email <input type="email" name="email" required /></label>
         <label>Create a New Password: <input type="password" name="password" required /></label>
-        <label>Enter Your name <input type="text" name="nom" required /></label>
+        <label>Enter Your Surname <input type="text" name="nom" required /></label>
         @error('name')
         <span class="invalid-feedback" role="alert">{{ @$message }}</span>
         @enderror
@@ -18,4 +17,4 @@
 @if(session('status'))
     <a href="#">{{ session('status') }}</a>
 @endif
-<a href="{{ route('about') }}">retour</a>
+<a href="{{ route('home') }}">retour</a>

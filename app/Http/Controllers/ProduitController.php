@@ -98,34 +98,36 @@ class ProduitController extends Controller
     public function addBookToCart($id)
     {
         $post = Post::findOrFail($id);
-        $cart = session()->get('cart',[]);
-        if(isset($cart[$id])){
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
-        }else{
+        } else {
             $cart[$id] = [
-             "title" => $post->title,
+                "title" => $post->title,
                 "quantity" => 1,
                 "price" => $post->price,
                 "img" => $post->img
             ];
         }
         session()->put('cart', $cart);
-        return redirect()->back()->with('success','ajout à la commande');
+        return redirect()->back()->with('success', 'ajout à la commande');
     }
+
     public function bookCart()
     {
-      return view('cart');
+        return view('cart');
     }
+
     public function checkout(Request $data)
     {
 
-        if (auth()->check()){
-            $order = New Order();
-            $order->status="pending";
+        if (auth()->check()) {
+            $order = new Order();
+            $order->status = "pending";
             $order->client_id = auth()->user()->id;
-            $order->adress=$data->input('adress');
-            $order->fullname=$data->input('fullname');
-            $order->phone=$data->input('phone');
+            $order->adress = $data->input('adress');
+            $order->fullname = $data->input('fullname');
+            $order->phone = $data->input('phone');
             if ($order->save()) {
                 $cart = session()->get('cart', []);
                 foreach ($cart as $id => $details) {
@@ -138,10 +140,14 @@ class ProduitController extends Controller
                     $orderitem->save();
                 }
             }
-            return redirect()->back()->with('success','success');
-        }
-        else{
+            return redirect()->back()->with('success', 'success');
+        } else {
             return redirect()->route('login');
         }
+    }
+    public function mescommandes()
+    {
+
+return view('commandes');
     }
 }

@@ -1,3 +1,4 @@
+@extends('welcome')
 <h1>login</h1>
 
 <form method="post" action="{{ route("login.post") }}">
@@ -16,8 +17,4 @@
     <input type="submit" name="login" value="login">
 </form>
 <a href="{{ route('password.request') }}">Forget password</a>
-<a href="{{ route('about') }}">retour</a>
-<form method="POST" action="{{ route('verification.send') }}">
-    @csrf
-    <button type="submit">Renvoyer l'email de vérification</button>
-</form>
+<a href="{{ route('home') }}">retour</a>
