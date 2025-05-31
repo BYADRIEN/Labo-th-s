@@ -1,13 +1,14 @@
 @extends('welcome')
 @extends('components.header')
 @section('content')
-    <h1>Liste de produits</h1>
+    <h1 class="bg-danger text-center">Nos thés</h1>
     <a href="">ajout d'une catégorie</a>
     <a href="">mes catégories</a>
     <a href="{{ route('commandes') }}">mes commande</a>
     <a href="{{ route('wishlist.index') }}">wishlist</a>
     <a href="{{ route('roles.index') }}">Roles</a>
     <a href="{{ route('permissions.index') }}">Permissions</a>
+    <a href="{{ route('users.index') }}">Users</a>
     <form method="GET">
         <select name="filter[category.catname]" onchange="this.form.submit()">
             <option value="">Tous les thés</option>

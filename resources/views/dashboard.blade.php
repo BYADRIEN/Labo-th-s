@@ -15,6 +15,9 @@
     <a href="{{ route('home') }}">Retour</a>
     <a href="{{ route('profile.password') }}">modifier password</a>
     <a href="{{ route('profile.edit') }}">modifier compte</a>
+    @role('admin')
+    <a href="{{ route('admin.index') }}">admin</a>
+    @endrole
 </div>
 <div class="container mt-4">
     <div class="row">
@@ -23,7 +26,7 @@
             <h4>Menu</h4>
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button class="nav-link active" id="v-pills-post-tab" data-bs-toggle="pill" data-bs-target="#v-pills-post" type="button" role="tab" aria-controls="v-pills-post" aria-selected="true">
-                   Produit(s)
+                    Produit(s)
                 </button>
                 <button class="nav-link" id="v-pills-commentaires-tab" data-bs-toggle="pill" data-bs-target="#v-pills-commentaires" type="button" role="tab" aria-controls="v-pills-commentaires" aria-selected="false">
                     Commentaire(s)
@@ -31,13 +34,13 @@
                 <button class="nav-link" id="v-pills-likes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-likes" type="button" role="tab" aria-controls="v-pills-likes" aria-selected="false">
                     Like(s)
                 </button>
-                <button class="nav-link" id="v-pills-likes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-likes" type="button" role="tab" aria-controls="v-pills-likes" aria-selected="false">
-                  Informations du client
+                <button class="nav-link" id="v-pills-client-tab" data-bs-toggle="pill" data-bs-target="#v-pills-client" type="button" role="tab" aria-controls="v-pills-client" aria-selected="false">
+                    Informations du client
                 </button>
-                <button class="nav-link" id="v-pills-likes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-likes" type="button" role="tab" aria-controls="v-pills-likes" aria-selected="false">
-                   User
+                <button class="nav-link" id="v-pills-user-tab" data-bs-toggle="pill" data-bs-target="#v-pills-user" type="button" role="tab" aria-controls="v-pills-user" aria-selected="false">
+                    User
                 </button>
-                <button class="nav-link" id="v-pills-likes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-likes" type="button" role="tab" aria-controls="v-pills-likes" aria-selected="false">
+                <button class="nav-link" id="v-pills-stock-tab" data-bs-toggle="pill" data-bs-target="#v-pills-stock" type="button" role="tab" aria-controls="v-pills-stock" aria-selected="false">
                     Stock
                 </button>
             </div>
@@ -48,7 +51,7 @@
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-post" role="tabpanel" aria-labelledby="v-pills-post-tab">
                     <h4>Posts</h4>
-                    <a href="{{ route('produits.create') }}">ajout d'un produit</a>
+                    <a href="{{ route('produits.create') }}">Ajout d'un produit</a>
                 </div>
                 <div class="tab-pane fade" id="v-pills-commentaires" role="tabpanel" aria-labelledby="v-pills-commentaires-tab">
                     <h4>Commentaires</h4>
@@ -57,6 +60,18 @@
                 <div class="tab-pane fade" id="v-pills-likes" role="tabpanel" aria-labelledby="v-pills-likes-tab">
                     <h4>Likes</h4>
                     <p>Contenu des likes ici.</p>
+                </div>
+                <div class="tab-pane fade" id="v-pills-client" role="tabpanel" aria-labelledby="v-pills-client-tab">
+                    <h4>Client</h4>
+                    <a href="{{ route('users.index') }}">Users</a>
+                </div>
+                <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                    <h4>User</h4>
+                    <p>Contenu user ici.</p>
+                </div>
+                <div class="tab-pane fade" id="v-pills-stock" role="tabpanel" aria-labelledby="v-pills-stock-tab">
+                    <h4>Stock</h4>
+                    <p>Contenu stock ici.</p>
                 </div>
             </div>
         </div>

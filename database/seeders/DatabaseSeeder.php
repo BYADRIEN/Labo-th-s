@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         //     ['name' => 'editor', 'guard_name' => 'web'],
         // ]);
 
-        // $this->call(OtherSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(AdminSeeder::class);
+
     }
 }

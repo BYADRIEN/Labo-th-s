@@ -76,7 +76,7 @@ Route::view('/profil/password','profile.password')->middleware('auth')->name('pr
 
 //Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
 
-Route::post('{post}/comments','CommentsController@store');
+//Route::post('{post}/comments','CommentsController@store');
 
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
 use App\Http\Controllers\GalleryController;
@@ -103,4 +103,18 @@ Route::get('/client/commandes',[ProduitController::class,'mescommandes'])->name(
 
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', \App\Http\Controllers\RoleController::class);
-//Route::resource('permissions/{permissionId}/delete', PermissionController::class,'destroy');
+Route::get('/users', [ClientController::class, 'indexindex'])->name('users.index')->middleware('auth');
+//Route::get('/users', [ClientController::class, 'indexindex'])->name('users.list')->middleware('auth');
+Route::controller(\App\Http\Controllers\RoleController::class)->group(function () {
+    Route::get('roles/{role}/give-permissions', 'showGivePermissionForm')->name('roles.show-give-permissions');
+    Route::put('roles/{role}/give-permissions', 'givePermission')->name('roles.give-permissions');
+});
+Route::get('/admin',function (){
+    return view('admin.index');
+})->middleware(['auth', 'role:admin'])->name('admin.index');
+
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('users/{user}/edit-role', [ClientController::class, 'editRoleForm'])->name('users.editRoleForm');
+    Route::put('users/{user}/update-role', [ClientController::class, 'updateRole'])->name('users.updateRole');
+});
+
