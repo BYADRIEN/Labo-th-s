@@ -77,3 +77,16 @@
         </div>
     </div>
 </div>
+@if(Auth::guard('client')->check() && Auth::guard('client')->user()->hasRole('admin'))
+    Je suis un admin
+    {{ Auth::guard('client')->user()->name }}
+@endif
+
+<h1>Welcome to the Dashboard</h1>
+
+@auth('client')
+    <h3>Je suis connecté {{ auth('client')->user()->nom }} {{ auth('client')->user()->prenom }}</h3>
+    <h1>je suis un client</h1>
+@else
+    <h3>Je ne suis pas connecté</h3>
+@endauth
