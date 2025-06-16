@@ -1,14 +1,16 @@
 @extends('welcome')
 @extends('components.header')
 @section('content')
-    <h1 class="bg-danger text-center">Nos thés</h1>
-    <a href="">ajout d'une catégorie</a>
+    <section class="hero-section">
+        {{-- Ici, tu peux ajouter le contenu qui sera par-dessus ton image de fond --}}
+        <div class="container text-center text-white p-5">
+            <h1>Nos thés</h1>
+            <p>Découvrez nos produits ici.</p>
+            <button class="btn btn-primary">Explorer</button>
+        </div>
+    </section>
     <a href="">mes catégories</a>
-    <a href="{{ route('commandes') }}">mes commande</a>
     <a href="{{ route('wishlist.index') }}">wishlist</a>
-    <a href="{{ route('roles.index') }}">Roles</a>
-    <a href="{{ route('permissions.index') }}">Permissions</a>
-    <a href="{{ route('users.index') }}">Users</a>
     <form method="GET">
         <select name="filter[category.catname]" onchange="this.form.submit()">
             <option value="">Tous les thés</option>
@@ -112,3 +114,4 @@
 @section('footer')
     @include('components.footer')
 @endsection
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">

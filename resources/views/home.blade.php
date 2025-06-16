@@ -12,9 +12,12 @@
             overflow: hidden; /* Évite les débordements */
         }
     </style>
-    <section>
-        <div>
-            <img src="{{ asset('images/gtgtg.jpg') }}" alt="Mon image">
+    <section class="hero-section">
+        {{-- Ici, tu peux ajouter le contenu qui sera par-dessus ton image de fond --}}
+        <div class="container text-center text-white p-5">
+            <h1>Bienvenue !</h1>
+            <p>Découvrez nos produits ici.</p>
+            <button class="btn btn-primary">Explorer</button>
         </div>
     </section>
     <section class="bg-success p-5">
@@ -33,7 +36,7 @@
                                         <p>{{ $post->content }}</p>
                                         <p>{{ $post->slug }}</p>
                                         <p>Publié le : {{ $post->created_at->format('d/m/Y') }}</p>
-                                        <a class="text-white" href="{{ route('produit.show', $post->slug) }}">voir l'article</a>
+                                        <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
 
                                     </div>
                                 </div>
@@ -123,7 +126,7 @@
 @section('footer')
     @include('components.footer')
 @endsection
-
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
 

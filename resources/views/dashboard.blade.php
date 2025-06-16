@@ -15,9 +15,13 @@
     <a href="{{ route('home') }}">Retour</a>
     <a href="{{ route('profile.password') }}">modifier password</a>
     <a href="{{ route('profile.edit') }}">modifier compte</a>
+    <a href="{{ url('category_page') }}">ajout d'une catégorie</a>
+    <a href="{{ route('roles.index') }}">Roles</a>
+    <a href="{{ route('permissions.index') }}">Permissions</a>
     @role('admin')
     <a href="{{ route('admin.index') }}">admin</a>
     @endrole
+    <a href="{{ route('commandes') }}">mes commande</a>
 </div>
 <div class="container mt-4">
     <div class="row">

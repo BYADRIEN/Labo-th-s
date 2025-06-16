@@ -4,7 +4,7 @@
     @csrf
     <input type="text" name="title" placeholder="Titre">
     <textarea name="content" placeholder="Contenu"></textarea>
-    <input type="text" name="slug" placeholder="Slug">
+    <!--<input type="text" name="slug" placeholder="Slug"> -->
     <input type="text" name="stock" placeholder="stock">
     <input type="text" name="price" placeholder="price">
     <input type="text" name="img" placeholder="img">

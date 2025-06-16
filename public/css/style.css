@@ -1,0 +1,34 @@
+/* public/css/style.css */
+
+/* (Le reste de ton CSS existant, y compris le style du body si tu en as un) */
+
+.hero-section {
+    /* Assure-toi que la section a une hauteur pour que l'image soit visible */
+    min-height: 400px; /* Ajuste cette hauteur selon tes besoins */
+    display: flex; /* Utile pour centrer le contenu verticalement si tu le souhaites */
+    align-items: center; /* Centre le contenu verticalement */
+    justify-content: center; /* Centre le contenu horizontalement */
+
+    /* --- PROPRIÉTÉS POUR L'IMAGE DE FOND --- */
+    background-image: url('../images/gtgtg.jpg'); /* Chemin vers ton image */
+    background-size: cover; /* L'image couvrira toute la zone disponible de la section */
+    background-position: center center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter */
+    /* background-attachment: fixed; */ /* Ne pas utiliser 'fixed' ici, car cela casserait l'effet sur la section */
+    /* --- FIN DES PROPRIÉTÉS IMAGE DE FOND --- */
+}
+
+/* Le reste de ton CSS... */
+
+.container {
+    /* Assure-toi que ton container est bien visible par-dessus l'image */
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2); /* Moins opaque si le texte est déjà lisible */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    /* Ajoute une couleur de texte pour qu'il soit lisible sur ton fond d'image */
+    color: white; /* ou la couleur qui contraste le mieux */
+}

@@ -8,6 +8,10 @@ use App\Models\OrderItem;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
+use Illuminate\Support\Str;
+
+// Ajoute ça en haut du fichier si pas déjà
+
 
 //use Illuminate\Support\Facades\Validator;
 
@@ -46,7 +50,8 @@ class ProduitController extends Controller
 
         $posts->title = $request->input('title');
         $posts->content = $request->input('content');
-        $posts->slug = $request->input('slug');
+        //$posts->slug = $request->input('slug');
+        $posts->slug = Str::slug($posts->title);
         $posts->stock = $request->input('stock');
         $posts->price = $request->input('price');
         $posts->img = $request->input('img');
@@ -145,9 +150,23 @@ class ProduitController extends Controller
             return redirect()->route('login');
         }
     }
+
     public function mescommandes()
     {
 
-return view('commandes');
+        return view('commandes');
+    }
+
+    public function cat()
+    {
+
+        return view('produits.category');
+    }
+
+    public function add_cat(Request $request)
+    {
+        $data = new Category;
+        $data->catname = $request->category;
+        $data->save();
     }
 }

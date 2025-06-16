@@ -42,7 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     Route::get('/home', [HomeController::class, 'homeindex'])->name('home');
 });
-
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard'); // <-- Nouveau !
+    // ...
+});
 // Routes produits
 Route::get('/produits', [ProduitController::class, 'index'])->name('produits');
 Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create')->middleware('auth');
@@ -99,7 +102,7 @@ Route::post('/wishlist/remove/{product}', [WishlistController::class, 'remove'])
 Route::get('/add-to-cart/{id}', [ProduitController::class, 'addBooktoCart'])->name('addbook.to.cart');
 Route::get('shopping-cart', [ProduitController::class, 'bookCart'])->name('shopping.cart');
 Route::get('/checkout',[ProduitController::class,'checkout'])->name('checkout');
-Route::get('/client/commandes',[ProduitController::class,'mescommandes'])->name('commandes');
+Route::get('/client/commandes',[ProduitController::class,'mescommandes'])->name('commandes')->middleware('auth');
 
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', \App\Http\Controllers\RoleController::class);
@@ -117,4 +120,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('users/{user}/edit-role', [ClientController::class, 'editRoleForm'])->name('users.editRoleForm');
     Route::put('users/{user}/update-role', [ClientController::class, 'updateRole'])->name('users.updateRole');
 });
+Route::get('/category_page', [ProduitController::class,'cat'])->name('category_page');
+Route::post('/add_category', [ProduitController::class,'add_cat'])->name('add_category');
 

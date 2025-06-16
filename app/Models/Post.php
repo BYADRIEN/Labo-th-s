@@ -4,17 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str; // Pour la génération du slug
 use RyanChandler\Comments\Concerns\HasComments;
-use App\Models\Category;
-use Dive\Wishlist\Contracts\Wishable; // À supprimer si non nécessaire
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Post extends Model
 {
     use HasFactory, HasComments;
 
     protected $table = 'posts';
-    protected $fillable = ['title', 'slug', 'content', 'category_id', 'stock', 'price', 'img', 'poids', 'montant_tva'];
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'category_id',
+        'stock',
+        'price',
+        'img',
+        'poids',
+        'montant_tva'
+    ];
+
+    // Génération automatique du slug à partir du titre
+    protected static function booted()
+    {
+        static::saving(function ($post) {
+            $post->slug = Str::slug($post->title);
+        });
+    }
 
     public function client()
     {
@@ -41,7 +58,6 @@ class Post extends Model
         return $this->belongsToMany(Client::class, 'post_likes')->withTimestamps();
     }
 
-    // Relation many-to-many avec les clients via la table pivot "wishlists"
     public function clients()
     {
         return $this->belongsToMany(Client::class, 'wishes', 'post_id', 'client_id');
