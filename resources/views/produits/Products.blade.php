@@ -9,8 +9,6 @@
             <button class="btn btn-primary">Explorer</button>
         </div>
     </section>
-    <a href="">mes catégories</a>
-    <a href="{{ route('wishlist.index') }}">wishlist</a>
     <form method="GET">
         <select name="filter[category.catname]" onchange="this.form.submit()">
             <option value="">Tous les thés</option>
@@ -89,7 +87,7 @@
                     {{ $post->price }}
                 </td>
                 <td>
-                    {{ $post->img }}
+                    <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
                 </td>
                 <td>
                     {{ $post->poids }}

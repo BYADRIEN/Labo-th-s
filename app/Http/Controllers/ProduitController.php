@@ -54,7 +54,8 @@ class ProduitController extends Controller
         $posts->slug = Str::slug($posts->title);
         $posts->stock = $request->input('stock');
         $posts->price = $request->input('price');
-        $posts->img = $request->input('img');
+        $imgPath = $request->file('img')->store('images', 'public');
+        $posts->img = $imgPath;
         $posts->poids = $request->input('poids');
         $posts->montant_tva = $request->input('montant_tva');
         $posts->category_id = $request->input('category_id'); // Assurez-vous de recevoir une valeur pour category_id
@@ -168,5 +169,13 @@ class ProduitController extends Controller
         $data = new Category;
         $data->catname = $request->category;
         $data->save();
+    }
+    public function Storeupload(Request $request)
+    {
+        $request->validate([
+            'img' => 'required|mimes:jpg,png,pdf|max:2048'
+        ]);
+        $file = $request->file('img');
+        $path = $file->store('upload');
     }
 }

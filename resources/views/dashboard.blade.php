@@ -18,6 +18,8 @@
     <a href="{{ url('category_page') }}">ajout d'une catégorie</a>
     <a href="{{ route('roles.index') }}">Roles</a>
     <a href="{{ route('permissions.index') }}">Permissions</a>
+    <a href="">mes catégories</a>
+    <a href="{{ route('wishlist.index') }}">wishlist</a>
     @role('admin')
     <a href="{{ route('admin.index') }}">admin</a>
     @endrole
