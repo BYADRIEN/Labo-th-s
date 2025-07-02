@@ -124,3 +124,5 @@ Route::get('/category_page', [ProduitController::class,'cat'])->name('category_p
 Route::post('/add_category', [ProduitController::class,'add_cat'])->name('add_category');
 Route::post('/upload_file', [ProduitController::class,'Storeupload'])->name('file.upload');
 
+Route::get('/categories', [ProduitController::class, 'categoryvie'])->name('categories');
+

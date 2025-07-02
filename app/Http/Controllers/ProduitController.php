@@ -178,4 +178,9 @@ class ProduitController extends Controller
         $file = $request->file('img');
         $path = $file->store('upload');
     }
+    public function categoryvie()
+    {
+        $categories = Category::all();
+        return view('produits.category_2', compact('categories'));
+    }
 }

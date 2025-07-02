@@ -19,7 +19,6 @@
             <p>Découvrez nos produits ici.</p>
             <button class="btn btn-primary">Explorer</button>
         </div>
-    </section>
     <section class="bg-success p-5">
         <div class="container text-center">
             <div class="row align-items-center">

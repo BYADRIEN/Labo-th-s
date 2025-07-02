@@ -19,6 +19,7 @@
     <a href="{{ route('roles.index') }}">Roles</a>
     <a href="{{ route('permissions.index') }}">Permissions</a>
     <a href="">mes catégories</a>
+    <a href="{{ route('categories') }}">Voir les catégories</a>
     <a href="{{ route('wishlist.index') }}">wishlist</a>
     @role('admin')
     <a href="{{ route('admin.index') }}">admin</a>
@@ -58,6 +59,33 @@
                 <div class="tab-pane fade show active" id="v-pills-post" role="tabpanel" aria-labelledby="v-pills-post-tab">
                     <h4>Posts</h4>
                     <a href="{{ route('produits.create') }}">Ajout d'un produit</a>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"> {{-- g-4 pour plus d'espace entre les cartes --}}
+                        @foreach($posts as $post)
+                            <div class="col">
+                                <div class="card h-100 shadow-sm border-0 d-flex flex-column">
+                                    <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
+                                    <p>{{ $post->title }}</p>
+                                    <p>{{ $post->price }}</p>
+                                    <a class="text-success" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
+                                    <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><a href="{{ url('edit/' . $post->id) }}">Modifier</a>
+                                                <a href="{{ url('delete/' . $post->id) }}">suprimer</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="v-pills-commentaires" role="tabpanel" aria-labelledby="v-pills-commentaires-tab">
                     <h4>Commentaires</h4>
