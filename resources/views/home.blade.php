@@ -15,10 +15,10 @@
     <section class="hero-section">
         {{-- Ici, tu peux ajouter le contenu qui sera par-dessus ton image de fond --}}
         <div class="container text-center text-white p-5">
-            <h1>Bienvenue !</h1>
-            <p>Découvrez nos produits ici.</p>
-            <button class="btn btn-primary">Explorer</button>
+            <h1>Bienvenue sur Labo des thés !</h1>
+            <p>La boutique de thés en Belgique</p>
         </div>
+    </section>
     <section class="bg-success p-5">
         <div class="container text-center">
             <div class="row align-items-center">
@@ -28,15 +28,14 @@
                 <div class="col-md-7">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            @foreach($posts as $post)
+                            @foreach($nouveautes as $post)
                                 <div class="swiper-slide d-flex align-items-center justify-content-center">
                                     <div class="text-center text-white">
+                                        <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
                                         <p>{{ $post->title }}</p>
-                                        <p>{{ $post->content }}</p>
-                                        <p>{{ $post->slug }}</p>
-                                        <p>Publié le : {{ $post->created_at->format('d/m/Y') }}</p>
+                                        <p>{{ $post->price }}</p>
                                         <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
-
+                                        <a class="text-white" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
                                     </div>
                                 </div>
                             @endforeach
@@ -46,66 +45,60 @@
             </div>
         </div>
     </section>
-    <section class="bg-success p-5 border border-white">
-        <div class="container text-center text-white">
-            <div class="row align-items-start">
-                <div class="col-md-5 mb-4 mb-md-0">
-                    img
+    <section class="p-5 border border-white">
+        <div class="container text-center">
+            <div class="row align-items-center"> {{-- Add align-items-center here --}}
+                <div class="col-6">
+                    <img src="https://letsenhance.io/static/images/hero-home.png" width="400">
                 </div>
-                <div class="col-md-7">
+                <div class="col-6 text-dark p-5">
                     About me
                 </div>
             </div>
         </div>
-    </section><form method="POST" action="/user/two-factor-authentication">
-        @csrf
-
-        @if(auth()->check() && auth()->user()->two_factor_secret)
-            @method('DELETE')
-
-            <div class="pb-5">
-                {!! auth()->user()->twoFactorQrCodeSvg() !!}
-            </div>
-
-            <button class="btn btn-danger">Désactiver</button>
-        @else
-            <button class="btn btn-primary">Activer</button>
-        @endif
-    </form>
-    <section class="bg-success">
-        <section class="bg-success p-5">
-            <div class="container text-center text-white">
-                <div class="row align-items-start">
-                    <div class="col-md-5 mb-4 mb-md-0">
-                        Nos thés
-                    </div>
-                    <div class="col-md-7">
-                        ici
-                    </div>
-                </div>
-            </div>
-        </section>
     </section>
-    <section class="bg-success p-5 border border-white">
-        <div class="container text-center text-white">
-            <div class="row align-items-start">
-                <div class="col-md-5 mb-4 mb-md-0">
-                    Gallerie
+    <section class="hero-section">
+        {{-- Ici, tu peux ajouter le contenu qui sera par-dessus ton image de fond --}}
+        <div class="container text-center text-white p-5">
+            <h1>Nos thés</h1>
+            <p>Découvrez nos produits ici.</p>
+            <a class="text-white text-decoration-none" href="{{ route('produits') }}">Vers nos produits</a>
+        </div>
+    </section>
+    <section class="p-5 border border-white">
+        <div class="container text-center">
+            <div class="row align-items-center"> {{-- Add align-items-center here --}}
+                <div class="col-6">
+                    <img src="https://letsenhance.io/static/images/hero-home.png" width="400">
                 </div>
-                <div class="col-md-7">
-                    ici
+                <div class="col-6 text-dark p-5">
+                    Galerie
                 </div>
             </div>
         </div>
     </section>
-    <section class="bg-success p-5 border">
-        <div class="container text-center text-white">
-            <div class="row align-items-start">
+    <section class="bg-success p-5">
+        <div class="container text-center">
+            <div class="row align-items-center">
                 <div class="col-md-5 mb-4 mb-md-0">
-                    ici
+                    <h1 class="text-center text-white edu-vic">Nos meilleurs thés</h1>
                 </div>
                 <div class="col-md-7">
-                    les thés avec etoile
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            @foreach($topThes as $post)
+                                <div class="swiper-slide d-flex align-items-center justify-content-center">
+                                    <div class="text-center text-white">
+                                        <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
+                                        <p>{{ $post->title }}</p>
+                                        <p>{{ $post->price }}</p>
+                                        <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
+                                        <a class="text-white" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,7 +106,7 @@
     <script>
         const swiper = new Swiper('.swiper-container', {
             loop: true,
-            slidesPerView: 1, // Affiche une seule slide à la fois
+            slidesPerView: 3, // Affiche une seule slide à la fois
             spaceBetween: 0, // Espace entre les slides
             autoplay: {
                 delay: 7000,

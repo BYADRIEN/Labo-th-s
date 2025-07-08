@@ -126,3 +126,4 @@ Route::post('/upload_file', [ProduitController::class,'Storeupload'])->name('fil
 
 Route::get('/categories', [ProduitController::class, 'categoryvie'])->name('categories');
 
+

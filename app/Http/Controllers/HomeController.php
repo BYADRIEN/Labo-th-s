@@ -31,23 +31,19 @@ class HomeController extends Controller
 
     public function homeindex()
     {
-        // Récupérer l'utilisateur authentifié
-       // $user = auth()->user();
+        // Nouveautés : derniers thés ajoutés
+        $nouveautes = Post::latest()->take(5)->get();
 
-        // Si l'utilisateur est authentifié, assigner le rôle
-        //if ($user) {
-        //    $assignRole = $user->assignRole('Admin');
-        //    dump($assignRole); // Affiche le rôle assigné
-        //    dump($user); // Affiche le rôle assigné
-        //} else {
-        //    dump('User is not authenticated');
-        //}
+        // Meilleurs thés : ceux avec le plus de likes
+        $topThes = Post::withCount('likes')
+            ->having('likes_count', '>=', 1) // FILTRE ici !
+            ->orderByDesc('likes_count') // Puis TRI (optionnel)
+            ->take(5) // Optionnel, si tu veux une limite
+            ->get();
 
-        // Récupérer seulement les 5 derniers posts
-        $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
-
-        return view('home', compact('posts'));
-        /* la fonction compact équivaut à array('posts' => $posts) */
-        //return view('home2');
+        return view('home', [
+            'nouveautes' => $nouveautes,
+            'topThes' => $topThes,
+        ]);
     }
 }

@@ -124,3 +124,18 @@
 @else
     <h3>Je ne suis pas connecté</h3>
 @endauth
+<form method="POST" action="/user/two-factor-authentication">
+    @csrf
+
+    @if(auth()->check() && auth()->user()->two_factor_secret)
+        @method('DELETE')
+
+        <div class="pb-5">
+            {!! auth()->user()->twoFactorQrCodeSvg() !!}
+        </div>
+
+        <button class="btn btn-danger">Désactiver</button>
+    @else
+        <button class="btn btn-primary">Activer</button>
+    @endif
+</form>
