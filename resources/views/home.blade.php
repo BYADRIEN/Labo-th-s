@@ -35,7 +35,7 @@
                                         <p>{{ $post->title }}</p>
                                         <p>{{ $post->price }}</p>
                                         <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
-                                        <a class="text-white" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
+                                        <a class="text-white" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier</a>
                                     </div>
                                 </div>
                             @endforeach
@@ -49,7 +49,7 @@
         <div class="container text-center">
             <div class="row align-items-center"> {{-- Add align-items-center here --}}
                 <div class="col-6">
-                    <img src="https://letsenhance.io/static/images/hero-home.png" width="400">
+                    <img src="https://www.thesdelapagode.com/guide-du-the/wp-content/uploads/2019/12/choix-th%C3%A9-vrac-infusette.jpg" width="600">
                 </div>
                 <div class="col-6 text-dark p-5">
                     About me
@@ -69,7 +69,7 @@
         <div class="container text-center">
             <div class="row align-items-center"> {{-- Add align-items-center here --}}
                 <div class="col-6">
-                    <img src="https://letsenhance.io/static/images/hero-home.png" width="400">
+                    <img src="https://www.le-guide-sante.org/sites/default/files/styles/full_size_10_cols/public/resources/news/the-bienfaits-mefaits.jpg?itok=ILlT7kbT" width="600">
                 </div>
                 <div class="col-6 text-dark p-5">
                     Galerie
@@ -93,7 +93,7 @@
                                         <p>{{ $post->title }}</p>
                                         <p>{{ $post->price }}</p>
                                         <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
-                                        <a class="text-white" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
+                                        <a class="text-white" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier</a>
                                     </div>
                                 </div>
                             @endforeach

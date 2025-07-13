@@ -1,43 +1,70 @@
 @extends('welcome')
 @extends('components.header')
 @section('content')
-    <section class="p-5">
-        <div class="container text-center">
-            <div class="row align-items-center">
-                <div class="col-md-5 mb-4 mb-md-0">
-                    <h1 class="text-center text-dark edu-vic p-2">Detail du produit</h1>
-                    <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="300">
-                    <br>
-                    <form class="p-4" action="{{ route('wishlist.add', $post->id) }}" method="POST">
-                        @csrf
-                        <button type="submit">Ajouter à la wishlist</button>
-                    </form>
-                    <a href="{{ route('home') }}">Retour à la liste des posts</a>
-                    <livewire:like-button :key="$post->id" :$post/>
-                    <h2 class="text-dark">Commentaires :</h2>
-                    <div>
-                        {{$post->body}}
-                    </div>
-                    <form action="{{ url("{$post->path()}/comments") }}" method="POST">
-                        {{ csrf_field() }}
-                        <textarea name="body">{{ old('body') }}</textarea>
-                        <button>commenter</button>
-                    </form>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col text-dark">
+                <a class="text-dark" href="{{ route('home') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50"
+                         fill="none" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="col text-dark">
+                <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="500">
+            </div>
+            <div class="col text-dark">
+                <h3 class="text-start mb-4">🛍️ {{ $post->title }}</h3>
+
+                {{-- Like Button --}}
+                <div class="mb-3">
+                    <livewire:like-button :key="$post->id" :post="$post" />
                 </div>
-                <div class="col-md-7">
-                    <h3 class="text-dark">Nom du Produit : {{ $post->title }}</h3>
-                    <h3 class="text-dark">Description : {{ $post->content }}</h3>
-                    <h3 class="text-dark">Categorie : {{ $post->category->catname }}</h3>
-                    <h3 class="text-dark">Prix : {{ $post->price }}</h3>
-                    <h3 class="text-dark">Stock : {{ $post->stock }}</h3>
-                    <h3 class="text-dark">Poids : {{ $post->poids }}</h3>
-                    <h3 class="text-dark">Montant_TVA : {{ $post->montant_tva }}</h3>
-                    <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
-                    <a href="{{ route('home') }}">Retour à la liste des posts</a>
+
+                {{-- Wishlist --}}
+                <form action="{{ route('wishlist.add', $post->id) }}" method="POST" class="mb-4">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">💖 Ajouter à la wishlist</button>
+                </form>
+
+                {{-- Infos produit --}}
+                <div class="p-3 mb-3 bg-light rounded border">
+                    <p><strong>Description :</strong><br>{{ $post->content }}</p>
+                    <p><strong>Catégorie :</strong> {{ $post->category->catname }}</p>
+                    <p><strong>Stock :</strong> {{ $post->stock }} paquets</p>
+                    <p><strong>Poids :</strong> {{ $post->poids }} g</p>
+                    <p><strong>Prix :</strong> {{ $post->price }} €</p>
+                    <p><strong>Montant TVA :</strong> {{ $post->montant_tva }} €</p>
                 </div>
+
+                {{-- Ajout au panier --}}
+                <form action="{{ route('addbook.to.cart', $post->id) }}" method="GET" class="d-flex align-items-center">
+                    <label for="quantity" class="me-2 mb-0">Quantité :</label>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control w-25 me-3">
+                    <button type="submit" class="btn btn-dark">🛒 Ajouter au panier</button>
+                </form>
             </div>
         </div>
-    </section>
+        <form action="{{ url("{$post->path()}/comments") }}" method="POST" class="mt-4">
+            @csrf
+            <div class="mb-3">
+                <label for="body" class="form-label">Commentaire :</label>
+                <textarea name="body" id="body" class="form-control" rows="4" placeholder="Votre commentaire ici">{{ old('body') }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-dark mt-2">Commenter</button>
+        </form>
+
+        @forelse($post->comments as $comment)
+            <div class="border p-3 my-2 bg-light rounded">
+                <p class="mb-1 text-dark">{{ $comment->body }}</p>
+                <small class="text-muted">Posté le {{ $comment->created_at->format('d/m/Y') }}</small>
+            </div>
+        @empty
+            <p class="text-muted">Aucun commentaire pour ce produit.</p>
+        @endforelse
+    </div>
 @endsection
 @section('footer')
     @include('components.footer')

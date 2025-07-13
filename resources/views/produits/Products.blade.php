@@ -25,7 +25,6 @@
     </div>
     <div class="col-4">
         <h1>Nos produits</h1>
-        <a href="{{ route('shopping.cart') }}">cart {{ count((array) session('cart')) }}</a>
         @if(session('success'))
             <div>
                 {{ session('success') }}

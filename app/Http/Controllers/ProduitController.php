@@ -74,10 +74,24 @@ class ProduitController extends Controller
     public function update(Request $request, $id)
     {
         $posts = Post::find($id);
+
         $posts->title = $request->input('title');
         $posts->content = $request->input('content');
-        $posts->slug = $request->input('content');
+        $posts->slug = Str::slug($posts->title);
+        $posts->stock = $request->input('stock');
+        $posts->price = $request->input('price');
+
+        if ($request->hasFile('img')) {
+            $imgPath = $request->file('img')->store('images', 'public');
+            $posts->img = $imgPath;
+        }
+
+        $posts->poids = $request->input('poids');
+        $posts->montant_tva = $request->input('montant_tva');
+        $posts->category_id = $request->input('category_id');
+
         $posts->save();
+
         return redirect()->route('produits');
     }
 

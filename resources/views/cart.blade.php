@@ -1,5 +1,6 @@
 @extends('welcome')
-
+@extends('components.header')
+@section('content')
 <p>ma commande</p>
 @if(session('cart'))
     @foreach(session('cart') as $id => $post)
@@ -18,3 +19,8 @@
     <input type="text" name="adress" placeholder="adress">
     <input type="submit" name="checkout" value="Proceed to checkout">
 </form>
+@endsection
+@section('footer')
+    @include('components.footer')
+@endsection
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
