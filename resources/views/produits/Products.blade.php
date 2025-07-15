@@ -8,8 +8,9 @@
         <p>Découvrez nos produits ici.</p>
     </div>
 </section>
+<div class="container">
 <div class="row">
-    <div class="col-4">
+    <div class="col-5">
         Filtre
         <form method="GET">
             <select name="filter[category.catname]" onchange="this.form.submit()">
@@ -23,8 +24,8 @@
             </select>
         </form>
     </div>
-    <div class="col-4">
-        <h1>Nos produits</h1>
+    <div class="col-7">
+        <h1 class="text-dark">Nos produits</h1>
         @if(session('success'))
             <div>
                 {{ session('success') }}
@@ -35,16 +36,17 @@
             @foreach($posts as $post)
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0 d-flex flex-column">
-                        <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
+                        <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="{{ $post->title }}">
                         <p>{{ $post->title }}</p>
                         <p>{{ $post->price }}</p>
                         <a class="text-success" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
-                        <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
+                        <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier</a>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+</div>
 </div>
 @endsection
 @section('footer')
