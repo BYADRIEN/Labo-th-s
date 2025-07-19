@@ -1,5 +1,4 @@
 @extends('welcome')
-@extends('components.header')
 @section('content')
     <style>
         .edu-vic {
@@ -114,9 +113,6 @@
             },
         });
     </script>
-@endsection
-@section('footer')
-    @include('components.footer')
 @endsection
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
