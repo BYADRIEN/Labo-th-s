@@ -28,8 +28,7 @@
                     <div class="card-body">
                         <p class="card-title fw-bold">{{ $post->title }}</p>
                         <p class="card-text">{{ $post->price }} €</p>
-                        <a class="text-success" href="{{ route('produit.show', $post->id) }}">Voir l'article</a><br>
-                        <a class="text-danger" href="{{ route('addbook.to.cart', $post->id) }}">Ajouter au panier</a>
+                        <a class="btn btn-dark" href="{{ route('produit.show', $post->id) }}">Voir l'article</a><br>
                     </div>
                 </div>
             </div>

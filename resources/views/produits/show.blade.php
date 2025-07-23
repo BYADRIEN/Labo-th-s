@@ -1,5 +1,4 @@
 @extends('welcome')
-@extends('components.header')
 @section('content')
     <div class="container p-5">
         <div class="row">

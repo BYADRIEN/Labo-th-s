@@ -133,6 +133,37 @@ class ProduitController extends Controller
         return redirect()->back()->with('success', 'ajout à la commande');
     }
 
+      public function updateBookToCart(Request $request, $id)
+{
+    // Corrige la recherche du produit : tu dois chercher par $id directement (pas $request->$id)
+    $post = Post::findOrFail($id);
+
+    // Récupère la quantité depuis le formulaire
+    $qty = $request->input('qty'); // ou 'quantity' selon le nom de ton input
+
+    // Récupère le panier dans la session (tableau)
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$id])) {
+        // Met à jour la quantité dans le panier (attention au nom des clés)
+        $cart[$id]['quantity'] = $qty;
+    } else {
+        // Si le produit n'existe pas dans le panier, on l'ajoute (optionnel ici)
+        $cart[$id] = [
+            "title" => $post->title,
+            "quantity" => $qty,
+            "price" => $post->price,
+            "img" => $post->img
+        ];
+    }
+
+    // Remet à jour la session
+    session()->put('cart', $cart);
+
+    return redirect()->back()->with('success', 'Quantité mise à jour');
+}
+
+
     public function bookCart()
     {
         return view('cart');
@@ -196,5 +227,11 @@ class ProduitController extends Controller
     {
         $categories = Category::all();
         return view('produits.category_2', compact('categories'));
+    }
+    public function changeStatus(Request $request, $id){
+        $order = Order::findOrFail($id);
+        $order->status=$request->status;
+        $order->save();
+        return redirect()->back();
     }
 }

@@ -1,141 +1,138 @@
 @extends('welcome')
-<div class="container text-center">
-    @role('admin')
-    Je suis un admin
-    @if(Auth::guard('client')->check())
-        {{ Auth::guard('client')->user()->name }}
-    @endif
-    @endrole
-    <h1>Welcome to the Dashboard</h1>
-    @auth('client')
-        <h3>Je suis connecté {{ auth()->user()->nom }} {{ auth()->user()->prenom }}</h3>
-    @else
-        <h3>Je ne suis pas connecté</h3>
-    @endauth
-    <a href="{{ route('home') }}">Retour</a>
-    <a href="{{ route('profile.password') }}">modifier password</a>
-    <a href="{{ route('profile.edit') }}">modifier compte</a>
-    <a href="{{ url('category_page') }}">ajout d'une catégorie</a>
-    <a href="{{ route('roles.index') }}">Roles</a>
-    <a href="{{ route('permissions.index') }}">Permissions</a>
-    <a href="">mes catégories</a>
-    <a href="{{ route('categories') }}">Voir les catégories</a>
-    <a href="{{ route('wishlist.index') }}">wishlist</a>
-    @role('admin')
-    <a href="{{ route('admin.index') }}">admin</a>
-    @endrole
-    <a href="{{ route('commandes') }}">mes commande</a>
-</div>
-<div class="container mt-4">
+
+@section('content')
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="tetx-dark">📊 Tableau de bord</h1>
+        @auth('client')
+            <p class="text-success">
+                Connecté en tant que <strong>{{ auth('client')->user()->nom }} {{ auth('client')->user()->prenom }}</strong>
+            </p>
+            @if(Auth::guard('client')->user()->hasRole('admin'))
+                <div class="d-flex justify-content-center align-items-center gap-3">
+                    <span class="badge bg-primary">Admin</span>
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger btn-sm">🔓 Se déconnecter</button>
+                    </form>
+                </div>
+            @endif
+        @else
+            <p class="text-danger">Vous n'êtes pas connecté.</p>
+        @endauth
+    </div>
+
+    {{-- Liens rapides --}}
+    <div class="row mb-4">
+        <div class="col-md d-flex flex-wrap gap-2 justify-content-center">
+            <a href="{{ route('profile.password') }}" class="btn btn-outline-dark">🔑 Modifier mot de passe</a>
+            <a href="{{ route('profile.edit') }}" class="btn btn-outline-dark">👤 Modifier profil</a>
+            <a href="{{ url('category_page') }}" class="btn btn-outline-dark">📁 Ajouter une catégorie</a>
+            <a href="{{ route('roles.index') }}" class="btn btn-outline-primary">👑 Rôles</a>
+            <a href="{{ route('permissions.index') }}" class="btn btn-outline-primary">🔐 Permissions</a>
+            <a href="{{ route('categories') }}" class="btn btn-outline-success">📂 Voir les catégories</a>
+            <a href="{{ route('wishlist.index') }}" class="btn btn-outline-danger">💖 Wishlist</a>
+            <a href="{{ route('commandes') }}" class="btn btn-outline-warning">📦 Mes commandes</a>
+            @role('admin')
+                <a href="{{ route('admin.index') }}" class="btn btn-outline-danger">⚙️ Admin</a>
+            @endrole
+        </div>
+    </div>
+
+    {{-- Tableau de bord avec onglets --}}
     <div class="row">
-        <!-- Colonne de gauche : menu -->
-        <div class="col-4">
-            <h4>Menu</h4>
-            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button class="nav-link active" id="v-pills-post-tab" data-bs-toggle="pill" data-bs-target="#v-pills-post" type="button" role="tab" aria-controls="v-pills-post" aria-selected="true">
-                    Produit(s)
-                </button>
-                <button class="nav-link" id="v-pills-commentaires-tab" data-bs-toggle="pill" data-bs-target="#v-pills-commentaires" type="button" role="tab" aria-controls="v-pills-commentaires" aria-selected="false">
-                    Commentaire(s)
-                </button>
-                <button class="nav-link" id="v-pills-likes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-likes" type="button" role="tab" aria-controls="v-pills-likes" aria-selected="false">
-                    Like(s)
-                </button>
-                <button class="nav-link" id="v-pills-client-tab" data-bs-toggle="pill" data-bs-target="#v-pills-client" type="button" role="tab" aria-controls="v-pills-client" aria-selected="false">
-                    Informations du client
-                </button>
-                <button class="nav-link" id="v-pills-user-tab" data-bs-toggle="pill" data-bs-target="#v-pills-user" type="button" role="tab" aria-controls="v-pills-user" aria-selected="false">
-                    User
-                </button>
-                <button class="nav-link" id="v-pills-stock-tab" data-bs-toggle="pill" data-bs-target="#v-pills-stock" type="button" role="tab" aria-controls="v-pills-stock" aria-selected="false">
-                    Stock
-                </button>
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" id="dashboard-tab" role="tablist">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#posts">📦 Produits</button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#comments">💬 Commentaires</button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#likes">❤️ Likes</button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#client">👥 Informations client</button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#users">🧑‍💻 Users</button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#stock">📊 Stock</button>
             </div>
         </div>
 
-        <!-- Colonne de droite : contenu -->
-        <div class="col-8">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-post" role="tabpanel" aria-labelledby="v-pills-post-tab">
-                    <h4>Posts</h4>
-                    <a href="{{ route('produits.create') }}">Ajout d'un produit</a>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"> {{-- g-4 pour plus d'espace entre les cartes --}}
+        <div class="col-md-9">
+            <div class="tab-content">
+                {{-- Produits --}}
+                <div class="tab-pane fade show active" id="posts">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4>🛍️ Produits</h4>
+                        <a href="{{ route('produits.create') }}" class="btn btn-sm btn-success">+ Ajouter un produit</a>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
                         @foreach($posts as $post)
                             <div class="col">
-                                <div class="card h-100 shadow-sm border-0 d-flex flex-column">
-                                    <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
-                                    <p>{{ $post->title }}</p>
-                                    <p>{{ $post->price }}</p>
-                                    <a class="text-success" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
-                                    <a class="text-danger" href="{{ route('addbook.to.cart',$post->id) }}">ajout au panier (0)</a>
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><a href="{{ url('edit/' . $post->id) }}">Modifier</a>
-                                                <a href="{{ url('delete/' . $post->id) }}">suprimer</a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card h-100 shadow-sm">
+                                    <img src="{{ asset('storage/' . $post->img) }}" class="card-img-top" alt="{{ $post->title }}" style="height: 200px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $post->title }}</h5>
+                                        <p class="card-text">{{ $post->price }} €</p>
+                                        <a href="{{ route('produit.show', $post->id) }}" class="btn btn-sm btn-outline-primary">Voir</a>
+                                        <a href="{{ route('addbook.to.cart', $post->id) }}" class="btn btn-sm btn-outline-success">Ajouter au panier</a>
+                                        <a href="{{ url('edit/' . $post->id) }}" class="btn btn-sm btn-outline-warning">Modifier</a>
+                                        <a href="{{ url('delete/' . $post->id) }}" class="btn btn-sm btn-outline-danger">Supprimer</a>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-commentaires" role="tabpanel" aria-labelledby="v-pills-commentaires-tab">
-                    <h4>Commentaires</h4>
+
+                {{-- Commentaires --}}
+                <div class="tab-pane fade" id="comments">
+                    <h4>💬 Commentaires</h4>
                     <p>Contenu des commentaires ici.</p>
                 </div>
-                <div class="tab-pane fade" id="v-pills-likes" role="tabpanel" aria-labelledby="v-pills-likes-tab">
-                    <h4>Likes</h4>
+
+                {{-- Likes --}}
+                <div class="tab-pane fade" id="likes">
+                    <h4>❤️ Likes</h4>
                     <p>Contenu des likes ici.</p>
                 </div>
-                <div class="tab-pane fade" id="v-pills-client" role="tabpanel" aria-labelledby="v-pills-client-tab">
-                    <h4>Client</h4>
-                    <a href="{{ route('users.index') }}">Users</a>
+
+                {{-- Clients --}}
+                <div class="tab-pane fade" id="client">
+                    <h4>👥 Informations client</h4>
+                    <a href="{{ route('users.index') }}" class="btn btn-outline-dark">Voir tous les utilisateurs</a>
                 </div>
-                <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
-                    <h4>User</h4>
+
+                {{-- Users --}}
+                <div class="tab-pane fade" id="users">
+                    <h4>🧑‍💻 Users</h4>
                     <p>Contenu user ici.</p>
                 </div>
-                <div class="tab-pane fade" id="v-pills-stock" role="tabpanel" aria-labelledby="v-pills-stock-tab">
-                    <h4>Stock</h4>
+
+                {{-- Stock --}}
+                <div class="tab-pane fade" id="stock">
+                    <h4>📊 Stock</h4>
                     <p>Contenu stock ici.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@if(Auth::guard('client')->check() && Auth::guard('client')->user()->hasRole('admin'))
-    Je suis un admin
-    {{ Auth::guard('client')->user()->name }}
-@endif
 
-<h1>Welcome to the Dashboard</h1>
-
-@auth('client')
-    <h3>Je suis connecté {{ auth('client')->user()->nom }} {{ auth('client')->user()->prenom }}</h3>
-    <h1>je suis un client</h1>
-@else
-    <h3>Je ne suis pas connecté</h3>
-@endauth
-<form method="POST" action="/user/two-factor-authentication">
-    @csrf
-
-    @if(auth()->check() && auth()->user()->two_factor_secret)
-        @method('DELETE')
-
-        <div class="pb-5">
-            {!! auth()->user()->twoFactorQrCodeSvg() !!}
+    {{-- 2FA Toggle --}}
+    @auth
+    <div class="card mt-5">
+        <div class="card-header">
+            <h5>🔐 Authentification à deux facteurs</h5>
         </div>
-
-        <button class="btn btn-danger">Désactiver</button>
-    @else
-        <button class="btn btn-primary">Activer</button>
-    @endif
-</form>
+        <div class="card-body">
+            <form method="POST" action="/user/two-factor-authentication">
+                @csrf
+                @if(auth()->user()->two_factor_secret)
+                    @method('DELETE')
+                    <div class="mb-3">
+                        {!! auth()->user()->twoFactorQrCodeSvg() !!}
+                    </div>
+                    <button type="submit" class="btn btn-danger">Désactiver</button>
+                @else
+                    <button type="submit" class="btn btn-primary">Activer</button>
+                @endif
+            </form>
+        </div>
+    </div>
+    @endauth
+</div>
+@endsection

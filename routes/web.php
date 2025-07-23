@@ -100,6 +100,8 @@ Route::post('/wishlist/add/{post}', [WishlistController::class, 'add'])->name('w
 Route::post('/wishlist/remove/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 Route::get('/add-to-cart/{id}', [ProduitController::class, 'addBooktoCart'])->name('addbook.to.cart');
+Route::put('/update-cart/{id}', [ProduitController::class, 'updateBookToCart'])->name('update.to.cart');
+
 Route::get('shopping-cart', [ProduitController::class, 'bookCart'])->name('shopping.cart');
 Route::get('/checkout',[ProduitController::class,'checkout'])->name('checkout');
 Route::get('/client/commandes',[ProduitController::class,'mescommandes'])->name('commandes')->middleware('auth');
@@ -125,5 +127,6 @@ Route::post('/add_category', [ProduitController::class,'add_cat'])->name('add_ca
 Route::post('/upload_file', [ProduitController::class,'Storeupload'])->name('file.upload');
 
 Route::get('/categories', [ProduitController::class, 'categoryvie'])->name('categories');
+Route::post('/change_status/{id}',[ProduitController::class,'changeStatus'])->name('admin.change_status');
 
 

@@ -16,9 +16,14 @@
     {{-- 3. Swiper CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
-    {{-- 5. Livewire Styles (DOIT ÊTRE ICI DANS LE HEAD) --}}
-    @livewireStyles
+    {{-- 4. Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    {{-- 5. Favicon --}}
+    <link rel="icon" href="https://www.svgrepo.com/show/393238/cafe.svg" type="image/svg+xml">
+
+    {{-- 6. Livewire Styles --}}
+    @livewireStyles
 </head>
 <body class="antialiased">
 @include('components.header') 

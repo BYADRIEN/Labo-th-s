@@ -1,51 +1,108 @@
-<nav class="navbar bg-success">
-    <div class="container">
-        <a class="navbar-brand text-white" href="{{ route('home') }}">labo'h</a>
-        <ul class="navbar-nav flex-row">
-            <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('about') }}">About me</a></li>
-            <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('produits') }}">Nos thés</a></li>
-            <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('gallery') }}">Galerie</a></li>
-        </ul>
-        <div class="d-flex p-2" role="search">
-            @auth
-                <a class="text-white text-decoration-none" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Se déconnecter
-                </a>
-                <a class="text-white text-decoration-none" href="{{ route('dashboard') }}">dashboard</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                {{ auth()->user()->nom }} {{ auth()->user()->prenom }}
-            @else
-                <a class="text-white text-decoration-none" href="{{ route('login') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50"
-                         fill="none" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
-                    </svg>
-                </a>
-                <a class="text-white text-decoration-none" href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50"
-                         fill="none" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
-                    </svg>
-                </a>
-                <a class="text-white text-decoration-none position-relative" href="{{ route('shopping.cart') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"
-                         fill="none" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                    </svg>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        {{ count((array) session('cart')) }}
-        <span class="visually-hidden">Articles dans le panier</span>
-    </span>
-                </a>
-            @endauth
-        </div>
+<style>
+  /* Styles pour la barre de navigation */
+  .navbar-custom { /* Un vert Bootstrap 'success' plus doux */
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Légère ombre pour un effet de profondeur */
+  }
+
+  .navbar-brand-custom {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2e7d32;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Légère ombre sur le texte */
+  }
+
+  .nav-link-custom {
+  color: #2e7d32 !important; /* Vert forêt */
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+  .nav-link-custom:hover,
+  .nav-link-custom:focus {
+    background-color: rgba(255,255,255,0.2); /* Légère surbrillance au survol */
+    color: #ffffff !important;
+    text-decoration: none;
+  }
+
+  /* Styles pour les conteneurs d'icônes Font Awesome */
+  .nav-icon-container {
+    display: flex;
+    align-items: center; /* Centrage vertical */
+    justify-content: center;
+    color: #2e7d32; /* Couleur de l'icône */
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    padding: 0.2rem; /* Petit padding pour le clic */
+  }
+
+  .nav-icon-container:hover {
+    transform: scale(1.1); /* Petit effet de zoom au survol */
+  }
+
+  /* Style spécifique pour les icônes Font Awesome */
+  .nav-icon-container .fas,
+  .nav-icon-container .far { /* .fas pour Solid, .far pour Regular */
+    font-size: 1.5rem; /* Taille de l'icône. Ajustez selon le texte. */
+    vertical-align: middle; /* Aide à l'alignement avec le texte si combiné */
+  }
+
+
+  /* Style pour le badge du panier */
+  .cart-badge {
+    top: 5px; /* Ajuster la position verticale du badge */
+    left: calc(100% + 5px); /* Placer le badge juste après l'icône */
+    transform: translate(-50%, -50%); /* Ajuster pour centrer le badge sur l'angle */
+    background-color: #dc3545; /* Couleur rouge Bootstrap 'danger' */
+    font-size: 0.75rem; /* Taille de la police du badge */
+    padding: .25em .6em; /* Padding pour le badge */
+    border-radius: 50%; /* Rendre le badge bien rond */
+    min-width: 22px; /* Assure que le badge est un cercle même avec un seul chiffre */
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-custom bg-light text-success">
+  <div class="container d-flex justify-content-between align-items-center">
+<i class="fa-solid fa-mug-saucer text-success"></i>
+    <a class="navbar-brand-custom text-decoration-none" href="{{ route('home') }}">Labo des Thés</a>
+
+    <ul class="navbar-nav flex-row ms-auto me-4">
+      <li class="nav-item">
+        <a class="nav-link-custom text-decoration-none" href="{{ route('about') }}">About me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link-custom text-decoration-none " href="{{ route('produits') }}">Nos thés</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link-custom text-decoration-none" href="{{ route('gallery') }}">Galerie</a>
+      </li>
+    </ul>
+
+    <div class="d-flex align-items-center gap-3">
+      @auth
+      <a class="nav-icon-container" href="{{ route('dashboard') }}" title="Dashboard">
+        <i class="fas fa-user-circle"></i> </a>
+      @else
+      <a class="nav-icon-container" href="{{ route('login') }}" title="Login">
+        <i class="fas fa-user-circle"></i> </a>
+      @endauth
+
+      <a class="nav-icon-container" href="#" title="Favoris">
+        <i class="fas fa-heart"></i> </a>
+
+      <a class="nav-icon-container position-relative" href="{{ route('shopping.cart') }}" title="Panier">
+        <i class="fas fa-shopping-cart"></i> <span class="position-absolute cart-badge text-white">
+          {{ count((array) session('cart')) }}
+          <span class="visually-hidden">Articles dans le panier</span>
+        </span>
+      </a>
     </div>
+  </div>
 </nav>
-
-
