@@ -31,7 +31,6 @@
             <a href="{{ route('roles.index') }}" class="btn btn-outline-primary">👑 Rôles</a>
             <a href="{{ route('permissions.index') }}" class="btn btn-outline-primary">🔐 Permissions</a>
             <a href="{{ route('categories') }}" class="btn btn-outline-success">📂 Voir les catégories</a>
-            <a href="{{ route('wishlist.index') }}" class="btn btn-outline-danger">💖 Wishlist</a>
             <a href="{{ route('commandes') }}" class="btn btn-outline-warning">📦 Mes commandes</a>
             @role('admin')
                 <a href="{{ route('admin.index') }}" class="btn btn-outline-danger">⚙️ Admin</a>
@@ -68,8 +67,6 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $post->title }}</h5>
                                         <p class="card-text">{{ $post->price }} €</p>
-                                        <a href="{{ route('produit.show', $post->id) }}" class="btn btn-sm btn-outline-primary">Voir</a>
-                                        <a href="{{ route('addbook.to.cart', $post->id) }}" class="btn btn-sm btn-outline-success">Ajouter au panier</a>
                                         <a href="{{ url('edit/' . $post->id) }}" class="btn btn-sm btn-outline-warning">Modifier</a>
                                         <a href="{{ url('delete/' . $post->id) }}" class="btn btn-sm btn-outline-danger">Supprimer</a>
                                     </div>

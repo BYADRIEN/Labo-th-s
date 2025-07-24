@@ -3,7 +3,7 @@
     <div class="container p-5">
         <div class="row">
             <div class="col text-dark">
-                <a class="text-dark" href="{{ route('home') }}">
+                <a class="text-dark" href="{{ route('produits') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50"
                          fill="none" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -40,8 +40,6 @@
 
                 {{-- Ajout au panier --}}
                 <form action="{{ route('addbook.to.cart', $post->id) }}" method="GET" class="d-flex align-items-center">
-                    <label for="quantity" class="me-2 mb-0">Quantité :</label>
-                    <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control w-25 me-3">
                     <button type="submit" class="btn btn-dark">🛒 Ajouter au panier</button>
                 </form>
             </div>

@@ -97,7 +97,7 @@ use Tests\Fixtures\Controllers\ProductController;
 // Dans routes/web.php
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist/add/{post}', [WishlistController::class, 'add'])->name('wishlist.add');
-Route::post('/wishlist/remove/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+Route::post('/wishlist/remove/{post}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 Route::get('/add-to-cart/{id}', [ProduitController::class, 'addBooktoCart'])->name('addbook.to.cart');
 Route::put('/update-cart/{id}', [ProduitController::class, 'updateBookToCart'])->name('update.to.cart');

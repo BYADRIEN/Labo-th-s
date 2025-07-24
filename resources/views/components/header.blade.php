@@ -94,7 +94,7 @@
         <i class="fas fa-user-circle"></i> </a>
       @endauth
 
-      <a class="nav-icon-container" href="#" title="Favoris">
+      <a class="nav-icon-container" href="{{ route('wishlist.index')}}" title="Favoris">
         <i class="fas fa-heart"></i> </a>
 
       <a class="nav-icon-container position-relative" href="{{ route('shopping.cart') }}" title="Panier">
