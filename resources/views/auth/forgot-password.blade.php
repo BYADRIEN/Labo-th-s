@@ -1,21 +1,32 @@
-<form method="POST" action="{{ route('password.email') }}">
-    @csrf
+@extends('welcome')
 
-    <div>
-        <label for="email">Adresse email :</label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus>
-        @error('email')
-        <span class="text-red-500">{{ $message }}</span>
-        @enderror
-    </div>
+@section('content')
+<div class="container mt-5">
+    <h2 class="mb-4">Réinitialisation du mot de passe</h2>
 
-    <div>
-        <button type="submit">Envoyer le lien de réinitialisation</button>
-    </div>
+    <form method="POST" action="{{ route('password.email') }}">
+        @csrf
 
-    @if (session('status'))
-        <div>
-            {{ session('status') }}
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse email :</label>
+            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                   id="email" name="email" value="{{ old('email') }}" required autofocus>
+            @error('email')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
-    @endif
-</form>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary w-100">Envoyer le lien de réinitialisation</button>
+        </div>
+
+        @if (session('status'))
+            <div class="alert alert-success mt-3">
+                {{ session('status') }}
+            </div>
+        @endif
+    </form>
+</div>
+@endsection

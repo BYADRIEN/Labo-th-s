@@ -1,23 +1,29 @@
 @extends('welcome')
-<h1>edit profile</h1>
-<form method="POST" action="{{ route('user-profile-information.update') }}">
-    @csrf
-    @method('PUT')
 
-    <div>
-        <label for="nom">Nom</label>
-        <input id="nom" type="text" name="nom" value="{{ old('nom', auth()->user()->nom) }}" required>
-    </div>
+@section('content')
+<div class="container mt-5">
+    <h2 class="mb-4">Modifier le profil</h2>
 
-    <div>
-        <label for="prenom">Prénom</label>
-        <input id="prenom" type="text" name="prenom" value="{{ old('prenom', auth()->user()->prenom) }}" required>
-    </div>
+    <form method="POST" action="{{ route('user-profile-information.update') }}" class="card p-4 shadow-sm">
+        @csrf
+        @method('PUT')
 
-    <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" required>
-    </div>
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input id="nom" type="text" name="nom" value="{{ old('nom', auth()->user()->nom) }}" required class="form-control">
+        </div>
 
-    <button type="submit">Mettre à jour</button>
-</form>
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input id="prenom" type="text" name="prenom" value="{{ old('prenom', auth()->user()->prenom) }}" required class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" required class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </form>
+</div>
+@endsection

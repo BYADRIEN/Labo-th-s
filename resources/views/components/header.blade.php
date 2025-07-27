@@ -1,108 +1,119 @@
 <style>
-  /* Styles pour la barre de navigation */
-  .navbar-custom { /* Un vert Bootstrap 'success' plus doux */
+  /* Styles personnalisés conservés */
+  .navbar-custom {
     padding: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Légère ombre pour un effet de profondeur */
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
   }
 
   .navbar-brand-custom {
     font-size: 1.8rem;
     font-weight: bold;
     color: #2e7d32;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Légère ombre sur le texte */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   }
 
   .nav-link-custom {
-  color: #2e7d32 !important; /* Vert forêt */
-  font-size: 1.1rem;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 5px;
-}
+    color: #2e7d32 !important;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+  }
 
   .nav-link-custom:hover,
   .nav-link-custom:focus {
-    background-color: rgba(255,255,255,0.2); /* Légère surbrillance au survol */
+    background-color: rgba(255,255,255,0.2);
     color: #ffffff !important;
     text-decoration: none;
   }
 
-  /* Styles pour les conteneurs d'icônes Font Awesome */
   .nav-icon-container {
     display: flex;
-    align-items: center; /* Centrage vertical */
+    align-items: center;
     justify-content: center;
-    color: #2e7d32; /* Couleur de l'icône */
+    color: #2e7d32;
     text-decoration: none;
     transition: transform 0.2s ease;
-    padding: 0.2rem; /* Petit padding pour le clic */
+    padding: 0.2rem;
   }
 
   .nav-icon-container:hover {
-    transform: scale(1.1); /* Petit effet de zoom au survol */
+    transform: scale(1.1);
   }
 
-  /* Style spécifique pour les icônes Font Awesome */
   .nav-icon-container .fas,
-  .nav-icon-container .far { /* .fas pour Solid, .far pour Regular */
-    font-size: 1.5rem; /* Taille de l'icône. Ajustez selon le texte. */
-    vertical-align: middle; /* Aide à l'alignement avec le texte si combiné */
+  .nav-icon-container .far {
+    font-size: 1.5rem;
+    vertical-align: middle;
   }
 
-
-  /* Style pour le badge du panier */
   .cart-badge {
-    top: 5px; /* Ajuster la position verticale du badge */
-    left: calc(100% + 5px); /* Placer le badge juste après l'icône */
-    transform: translate(-50%, -50%); /* Ajuster pour centrer le badge sur l'angle */
-    background-color: #dc3545; /* Couleur rouge Bootstrap 'danger' */
-    font-size: 0.75rem; /* Taille de la police du badge */
-    padding: .25em .6em; /* Padding pour le badge */
-    border-radius: 50%; /* Rendre le badge bien rond */
-    min-width: 22px; /* Assure que le badge est un cercle même avec un seul chiffre */
+    top: 5px;
+    left: calc(100% + 5px);
+    transform: translate(-50%, -50%);
+    background-color: #dc3545;
+    font-size: 0.75rem;
+    padding: .25em .6em;
+    border-radius: 50%;
+    min-width: 22px;
     height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
+    white-space: nowrap;
   }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-custom bg-light text-success">
-  <div class="container d-flex justify-content-between align-items-center">
-<i class="fa-solid fa-mug-saucer text-success"></i>
-    <a class="navbar-brand-custom text-decoration-none" href="{{ route('home') }}">Labo des Thés</a>
+  <div class="container">
+    <a class="navbar-brand-custom text-decoration-none d-flex align-items-center gap-2" href="{{ route('home') }}">
+      <i class="fa-solid fa-mug-saucer text-success"></i>
+      Labo des Thés
+    </a>
 
-    <ul class="navbar-nav flex-row ms-auto me-4">
-      <li class="nav-item">
-        <a class="nav-link-custom text-decoration-none" href="{{ route('about') }}">About me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link-custom text-decoration-none " href="{{ route('produits') }}">Nos thés</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link-custom text-decoration-none" href="{{ route('gallery') }}">Galerie</a>
-      </li>
-    </ul>
+    <!-- Burger button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="d-flex align-items-center gap-3">
-      @auth
-      <a class="nav-icon-container" href="{{ route('dashboard') }}" title="Dashboard">
-        <i class="fas fa-user-circle"></i> </a>
-      @else
-      <a class="nav-icon-container" href="{{ route('login') }}" title="Login">
-        <i class="fas fa-user-circle"></i> </a>
-      @endauth
+    <!-- Menu responsive -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link-custom text-decoration-none" href="{{ route('about') }}">About me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link-custom text-decoration-none" href="{{ route('produits') }}">Nos thés</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link-custom text-decoration-none" href="{{ route('gallery') }}">Galerie</a>
+        </li>
+      </ul>
 
-      <a class="nav-icon-container" href="{{ route('wishlist.index')}}" title="Favoris">
-        <i class="fas fa-heart"></i> </a>
+      <div class="d-flex align-items-center gap-3 ms-lg-3 mt-3 mt-lg-0">
+        @auth
+          <a class="nav-icon-container" href="{{ route('dashboard') }}" title="Dashboard">
+            <i class="fas fa-user-circle"></i>
+          </a>
+        @else
+          <a class="nav-icon-container" href="{{ route('login') }}" title="Login">
+            <i class="fas fa-user-circle"></i>
+          </a>
+        @endauth
 
-      <a class="nav-icon-container position-relative" href="{{ route('shopping.cart') }}" title="Panier">
-        <i class="fas fa-shopping-cart"></i> <span class="position-absolute cart-badge text-white">
-          {{ count((array) session('cart')) }}
-          <span class="visually-hidden">Articles dans le panier</span>
-        </span>
-      </a>
+        <a class="nav-icon-container" href="{{ route('wishlist.index') }}" title="Favoris">
+          <i class="fas fa-heart"></i>
+        </a>
+
+        <a class="nav-icon-container position-relative" href="{{ route('shopping.cart') }}" title="Panier">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="position-absolute cart-badge text-white">
+            {{ count((array) session('cart')) }}
+            <span class="visually-hidden">Articles dans le panier</span>
+          </span>
+        </a>
+      </div>
     </div>
   </div>
 </nav>

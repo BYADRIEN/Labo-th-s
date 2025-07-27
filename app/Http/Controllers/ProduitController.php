@@ -65,12 +65,13 @@ class ProduitController extends Controller
         return redirect('produits');
     }
 
-    public function edit($id)
-    {
-        $posts = Post::find($id);
-        return view('produits.edit', ['id' => $id]);
-    }
+   public function edit($id)
+{
+    $posts = Post::findOrFail($id);
+    $categories = Category::all(); // utile pour le <select>
 
+    return view('produits.edit', compact('posts', 'categories', 'id'));
+}
     public function update(Request $request, $id)
     {
         $posts = Post::find($id);
@@ -165,10 +166,10 @@ class ProduitController extends Controller
 
 
     public function bookCart()
-    {
-        return view('cart');
-    }
-
+{
+    $cart = session()->get('cart', []);
+    return view('cart', compact('cart'));
+}
     public function checkout(Request $data)
     {
 

@@ -1,5 +1,4 @@
 @extends('welcome')
-@extends('components.header')
 @section('content')
     <section class="hero-section">
         {{-- Ici, tu peux ajouter le contenu qui sera par-dessus ton image de fond --}}

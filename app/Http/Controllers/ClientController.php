@@ -36,7 +36,7 @@ class ClientController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('about'));
+            return redirect()->intended(route('home'));
         }
         return redirect(route("login"))->with("error", "Email ou mot de passe incorrect");
     }

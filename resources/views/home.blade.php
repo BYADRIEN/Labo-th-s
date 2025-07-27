@@ -129,7 +129,7 @@
                                 <div class="text-center text-white">
                                     <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
                                     <p>{{ $post->title }}</p>
-                                    <p>{{ $post->price }}</p>
+                                    <p>{{ $post->price }} €</p>
                                     <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
                                     <div class="text-center text-white">
                                         <img src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->title }}" width="200">
                                         <p>{{ $post->title }}</p>
-                                        <p>{{ $post->price }}</p>
+                                        <p>{{ $post->price }} €</p>
                                         <a class="text-white" href="{{ route('produit.show', $post->id) }}">voir l'article</a>
                                     </div>
                                 </div>
