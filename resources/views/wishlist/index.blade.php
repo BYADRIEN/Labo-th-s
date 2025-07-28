@@ -24,7 +24,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
-                         <h5 class="card-title">{{ $item->price }}</h5>
+                         <h5 class="card-title">{{ $item->price }} €</h5>
                      <img src="{{ asset('storage/' . $item->img) }}" class="card-img-top" alt="{{ $item->title }}" style="height: 200px; object-fit: cover;">
                         <form action="{{ route('wishlist.remove', $item->id) }}" method="POST" class="mt-3">
                             @csrf

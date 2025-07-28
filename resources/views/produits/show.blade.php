@@ -33,7 +33,7 @@
                     <p><strong>Description :</strong><br>{{ $post->content }}</p>
                     <p><strong>Catégorie :</strong> {{ $post->category->catname }}</p>
                     <p><strong>Stock :</strong> {{ $post->stock }} paquets</p>
-                    <p><strong>Poids :</strong> {{ $post->poids }} g</p>
+                    <p><strong>Poids :</strong> {{ $post->poids }} grammes</p>
                     <p><strong>Prix :</strong> {{ $post->price }} €</p>
                     <p><strong>Montant TVA :</strong> {{ $post->montant_tva }} €</p>
                 </div>

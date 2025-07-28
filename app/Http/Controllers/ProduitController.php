@@ -34,36 +34,48 @@ class ProduitController extends Controller
         return view('produits.Products', compact('posts', 'categories'));
     }
 
-    public function create()
-    {
-        return view('produits.create');
-    }
-
+public function create()
+{
+    $categories = Category::all();
+    return view('produits.create', compact('categories'));
+}
     public function add(Request $request)
     {
         return $request->input();
     }
 
     public function insert(Request $request)
-    {
-        $posts = new Post;
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'nullable|string',
+        'stock' => 'required|integer|min:0',
+        'price' => 'required|numeric|min:0',
+        'img' => 'required|image|max:2048',
+        'poids' => 'nullable|integer|min:0',
+        'montant_tva' => 'nullable|numeric|min:0|max:100',
+        'category_id' => 'required|exists:categories,id',
+    ]);
 
-        $posts->title = $request->input('title');
-        $posts->content = $request->input('content');
-        //$posts->slug = $request->input('slug');
-        $posts->slug = Str::slug($posts->title);
-        $posts->stock = $request->input('stock');
-        $posts->price = $request->input('price');
-        $imgPath = $request->file('img')->store('images', 'public');
-        $posts->img = $imgPath;
-        $posts->poids = $request->input('poids');
-        $posts->montant_tva = $request->input('montant_tva');
-        $posts->category_id = $request->input('category_id'); // Assurez-vous de recevoir une valeur pour category_id
+    $post = new Post();
+    $post->title = $validated['title'];
+    $post->content = $validated['content'] ?? null;
+    $post->slug = Str::slug($post->title);
+    $post->stock = $validated['stock'];
+    $post->price = $validated['price'];
+    $post->poids = $validated['poids'] ?? null;
+    $post->montant_tva = $validated['montant_tva'] ?? null;
+    $post->category_id = $validated['category_id'];
 
-        $posts->save();
-
-        return redirect('produits');
+    if ($request->hasFile('img')) {
+        $post->img = $request->file('img')->store('images', 'public');
     }
+
+    $post->save();
+
+    return redirect()->route('produits')->with('success', 'Produit ajouté avec succès.');
+}
+
 
    public function edit($id)
 {
@@ -235,4 +247,27 @@ class ProduitController extends Controller
         $order->save();
         return redirect()->back();
     }
+   public function updatecategory(Request $request, $id)
+{
+    $category = Category::findOrFail($id);
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $category->catname = $request->input('name');
+    $category->save();
+
+    return redirect()->route('dashboard')->with('success', 'Catégorie modifiée avec succès');
+}
+public function editcategory($id)
+{
+    $category = Category::findOrFail($id);
+    return view('produits.edit_category', compact('category'));
+}
+public function destroy($id)
+{
+$category = Category::findOrFail($id);
+$category->delete();
+return redirect('dashboard');
+}
 }

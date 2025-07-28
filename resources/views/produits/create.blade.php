@@ -60,22 +60,12 @@
         </div>
 
         {{-- Champ Catégorie --}}
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Catégorie</label>
-            <select name="category_id" id="category_id" class="form-select" required>
-                {{-- Idéalement, cette liste doit être générée dynamiquement depuis votre base de données,
-                     passée depuis le contrôleur à la vue.
-                     Ex: @foreach($categories as $category)
-                             <option value="{{ $category->id }}">{{ $category->name }}</option>
-                         @endforeach
-                --}}
-                <option value="">Sélectionnez une catégorie</option>
-                <option value="1">Catégorie 1</option>
-                <option value="2">Catégorie 2</option>
-                <option value="3">Catégorie 3</option>
-            </select>
-            @error('category_id') <div class="text-danger">{{ $message }}</div> @enderror
-        </div>
+      <select name="category_id" id="category_id" class="form-select" required>
+    <option value="">Sélectionnez une catégorie</option>
+    @foreach($categories as $category)
+        <option value="{{ $category->id }}">{{ $category->catname }}</option>
+    @endforeach
+</select>
 
         {{-- Boutons d'action --}}
         <div class="d-flex justify-content-between">

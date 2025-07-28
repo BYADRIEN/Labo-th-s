@@ -57,12 +57,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Routes produits publiques et sécurisées
 Route::get('/produits', [ProduitController::class, 'index'])->name('produits');
-Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show');
-Route::get('/produits/create', [ProduitController::class, 'create'])->middleware('auth')->name('produits.create');
+//Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show');
+//Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create');
+//Route::post('insert-data', [ProduitController::class, 'insert'])->middleware('auth')->name('add');
+//Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('produits.edit');
+//Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+//Route::delete('delete/{id}', [ProduitController::class, 'delete'])->name('produits.delete');
+
+// Ordre correct pour les routes de produits
+Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create'); // Route spécifique en premier !
+Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show'); // Route générique en second
+
+// ... le reste de vos routes de produits (insert-data, edit, update, delete)
 Route::post('insert-data', [ProduitController::class, 'insert'])->middleware('auth')->name('add');
 Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('produits.edit');
 Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
-Route::get('delete/{id}', [ProduitController::class, 'delete'])->name('produits.delete');
+Route::delete('delete/{id}', [ProduitController::class, 'delete'])->name('produits.delete');
+
 
 // Autres pages publiques
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -106,3 +117,8 @@ Route::post('/add_category', [ProduitController::class, 'add_cat'])->name('add_c
 Route::post('/upload_file', [ProduitController::class, 'Storeupload'])->name('file.upload');
 Route::get('/categories', [ProduitController::class, 'categoryvie'])->name('categories');
 Route::post('/change_status/{id}', [ProduitController::class, 'changeStatus'])->name('admin.change_status');
+
+
+Route::get('categories/{id}/edit', [ProduitController::class, 'editcategory'])->name('categories.edit');
+Route::put('categories/{id}', [ProduitController::class, 'updatecategory'])->name('categories.update');
+Route::delete('categories/{id}', [ProduitController::class, 'destroy'])->name('categories.delete');
