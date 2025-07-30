@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Page d'accueil publique
 Route::get('/', [HomeController::class, 'homeindex'])->name('home');
@@ -122,3 +123,9 @@ Route::post('/change_status/{id}', [ProduitController::class, 'changeStatus'])->
 Route::get('categories/{id}/edit', [ProduitController::class, 'editcategory'])->name('categories.edit');
 Route::put('categories/{id}', [ProduitController::class, 'updatecategory'])->name('categories.update');
 Route::delete('categories/{id}', [ProduitController::class, 'destroy'])->name('categories.delete');
+Route::get('/comments/{comment}/edit', [DashboardController::class, 'edit'])->name('comment.edit');
+Route::put('/comments/{comment}', [DashboardController::class, 'update'])->name('comment.update');
+
+Route::get('/update-client/{id}', [DashboardController::class,'updateClient'])->name('client.edit');
+Route::post('update/traitement', [DashboardController::class,'updateClientTraitement'])->name('updateClientTraitement');
+Route::delete('/delete_client/{id}', [DashboardController::class, 'destroyClient'])->name('delete_client');

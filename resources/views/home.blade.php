@@ -106,15 +106,19 @@
         .bg-light {
             background-color: #f8f5f0 !important;
         }
+      .bg-overlay {
+    background-color: rgba(0, 0, 0, 0.4); /* noir semi-transparent */
+    color: white;
+}
     </style>
 
     <section class="hero-section section-verte p-5">
-        <div class="container text-center">
-            <h1>Bienvenue sur Labo des thés !</h1>
-            <p>La boutique de thés en Belgique</p>
-        </div>
-    </section>
-
+    <div class="container text-center bg-overlay p-4 rounded">
+        <h1>Bienvenue sur Labo des thés !</h1>
+        <p class="fw-bold mb-3">Commandez en ligne, récupérez sur place</p>
+        <p class="lead">Labo des thés, votre boutique belge de thé en <strong>Click & Collect</strong>. Explorez nos thés en ligne, passez commande, puis récupérez-les en toute simplicité !</p>
+    </div>
+</section>
 <section class="section-verte py-5">
     <div class="container">
         <div class="row align-items-center">

@@ -11,7 +11,8 @@
 
     /* --- PROPRIÉTÉS POUR L'IMAGE DE FOND --- */
     background-image: url('https://www.consoglobe.com/wp-content/uploads/2021/04/the-naturel-sante-shutterstock_2027712344.jpg.webp'); /* Chemin vers ton image */
-    --background-image: url('../images/gtgtg.jpg'); /* Chemin vers ton image */
+    /*background-image: url('../images/gtgtg.jpg'); /* Chemin vers ton image */
+    /*background-image: url('https://images.pexels.com/photos/5480151/pexels-photo-5480151.jpeg');*/
     background-size: cover; /* L'image couvrira toute la zone disponible de la section */
     background-position: center center; /* Centre l'image */
     background-repeat: no-repeat; /* Empêche l'image de se répéter */
