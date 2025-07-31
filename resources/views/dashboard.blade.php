@@ -31,7 +31,6 @@
             </div>
         @endauth
     </div>
-
     ---
 
     {{-- Liens rapides --}}
@@ -173,6 +172,27 @@
                         <div class="card-body">
                             <p class="text-muted">Aperçu des "likes" sur les produits ici.</p>
                             {{-- Ajoutez ici la logique pour afficher les likes --}}
+                            <div class="card shadow-sm mb-4">
+    <div class="card-header bg-info text-white">
+        <h5 class="mb-0"><i class="bi bi-heart-fill me-2"></i>Produits les plus likés</h5>
+    </div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Nombre de Likes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($posts as $post)
+            <tr>
+                <td>{{ $post->title }}</td>
+                <td>{{ $post->likes_count }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
                         </div>
                     </div>
                 </div>
@@ -295,6 +315,37 @@
                         <div class="card-body">
                             <p class="text-muted">Tableau de bord de gestion du stock.</p>
                             {{-- Ajoutez ici la logique pour le stock --}}
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-warning text-dark">
+        <h5 class="mb-0"><i class="bi bi-box-seam me-2"></i>Gestion de stock</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach($posts as $post)
+                    <tr>
+                        <td>{{ $post->title }}</td>
+                        <td>{{ $post->stock }}</td>
+                        <td>
+                            @if($post->stock < 2)
+                                <span class="badge bg-danger">Stock bas</span>
+                            @else
+                                <span class="badge bg-success">OK</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
                         </div>
                     </div>
                 </div>

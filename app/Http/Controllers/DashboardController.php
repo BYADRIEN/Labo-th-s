@@ -16,6 +16,7 @@ class DashboardController extends Controller
         $categories = Category::all();
         $clients = Client::with('roles')->get();
         $comments = Comment::latest()->take(10)->get();
+         $posts = Post::withCount('likes')->get(); // 👈
 
         return view('dashboard', compact('posts', 'categories', 'clients', 'comments'));
     }
