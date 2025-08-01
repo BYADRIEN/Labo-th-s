@@ -129,3 +129,12 @@ Route::put('/comments/{comment}', [DashboardController::class, 'update'])->name(
 Route::get('/update-client/{id}', [DashboardController::class,'updateClient'])->name('client.edit');
 Route::post('update/traitement', [DashboardController::class,'updateClientTraitement'])->name('updateClientTraitement');
 Route::delete('/delete_client/{id}', [DashboardController::class, 'destroyClient'])->name('delete_client');
+
+
+Route::get('dashboard/post',[DashboardController::class,'indexpost'])->name('indexpost');
+Route::get('dashboard/comment',[DashboardController::class,'indexcomment'])->name('indexcomment');
+Route::get('dashboard/client',[DashboardController::class,'indexclient'])->name('indexclient');
+Route::get('dashboard/stock',[DashboardController::class,'indexstock'])->name('indexstock');
+Route::get('dashboard/like',[DashboardController::class,'indexlike'])->name('indexlike');
+Route::get('dashboard/categories',[DashboardController::class,'indexcategories'])->name('indexcategories');
+Route::get('dashboard/roles',[DashboardController::class,'indexrole'])->name('indexrole');

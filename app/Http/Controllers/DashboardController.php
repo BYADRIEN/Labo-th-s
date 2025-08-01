@@ -66,4 +66,39 @@ public function destroyClient($id)
     }
     return redirect('dashboard');
 }
+public function indexpost()
+{
+    $posts = Post::all();
+    return view('test01',compact('posts'));
+}
+public function indexcomment()
+{
+     $comments = Comment::latest()->take(10)->get();
+    return view('test02',compact('comments'));
+}
+public function indexclient()
+{
+    $clients = Client::all();
+    return view('test03',compact('clients'));
+}
+public function indexstock()
+{
+     $posts = Post::all();
+    return view('test04',compact('posts'));
+}
+public function indexlike()
+{
+     $posts = Post::withCount('likes')->get(); // 👈
+       return view('test05',compact('posts'));
+}
+public function indexcategories()
+{
+    $categories = Category::all();
+    return view('test06',compact('categories'));
+}
+public function indexrole()
+{
+   $clients = Client::with('roles')->get();
+    return view('test07',compact('clients'));
+}
 }
