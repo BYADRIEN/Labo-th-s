@@ -89,19 +89,64 @@
   .section-title span.icon {
     font-size: 1.5rem;
   }
+  .btn-grey {
+  background-color: #e0e0e0;
+  color: #3b4a2a;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+.btn-grey:hover {
+  background-color: #d5d5d5;
+}
+
+.btn-green {
+  background-color: #a4c639;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+.btn-green:hover {
+  background-color: #8aa82f;
+}
+
+.btn-red {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.btn-red:hover {
+  background-color: #c9302c;
+}
 </style>
 
 <div class="container py-5">
   <h1 class="dashboard-title">📊 Tableau de bord Administrateur</h1>
 
   @auth('client')
-    <div class="alert-success">
-      <div>Connecté en tant que <strong>{{ auth('client')->user()->prenom }} {{ auth('client')->user()->nom }}</strong></div>
-      <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="btn-custom">Se déconnecter</button>
-      </form>
-    </div>
+   <div class="alert-success">
+  <div>Connecté en tant que <strong>{{ auth('client')->user()->prenom }} {{ auth('client')->user()->nom }}</strong></div>
+  <div class="d-flex gap-2 align-items-center">
+    <a href="{{ route('profile.password') }}" class="btn-grey">🔑 Mot de passe</a>
+    <a href="{{ route('profile.edit') }}" class="btn-green">👤 Profil</a>
+    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+      @csrf
+      <button type="submit" class="btn-red">🚪 Déconnexion</button>
+    </form>
+  </div>
+</div>
   @endauth
 
   <div class="dashboard-section">
@@ -109,41 +154,53 @@
     <p class="dashboard-info">Visualisez les dernières commandes passées par vos clients.</p>
     <a href="{{ route('commandes') }}" class="btn-link">Voir les commandes</a>
   </div>
-
+@role('admin')
   <div class="dashboard-section">
     <h2 class="section-title"><span class="icon">🫖</span> Produits en stock</h2>
     <p class="dashboard-info">Suivez l’inventaire de vos thés disponibles.</p>
     <a href="{{ route('indexstock') }}" class="btn-link">Voir le stock</a>
   </div> 
-
+  @endrole
+@role('admin')
   <div class="dashboard-section">
     <h2 class="section-title"><span class="icon">📦</span> Produits du magasin</h2>
     <p class="dashboard-info">Ajout, modification, suppression des produits.</p>
     <a href="{{ route('indexpost') }}" class="btn-link">Gérer les produits</a>
   </div>
-
+ @endrole
+ @role('admin')
   <div class="dashboard-section">
     <h2 class="section-title"><span class="icon">👥</span> Clients enregistrés</h2>
     <p class="dashboard-info">Liste des amateurs de thé fidèles à votre boutique.</p>
     <a href="{{ route('indexclient') }}" class="btn-link">Voir les clients</a>
   </div>
-
+   @endrole
+@role('admin')
   <div class="dashboard-section">
     <h2 class="section-title"><span class="icon">❤️</span> Likes</h2>
     <p class="dashboard-info">Avis et retours de vos clients sur vos produits.</p>
     <a href="{{ route('indexlike') }}" class="btn-link">Voir les likes</a>
   </div>
-
+   @endrole
+  @role('admin')
   <div class="dashboard-section">
     <h2 class="section-title"><span class="icon">📂</span> Catégories</h2>
     <p class="dashboard-info">Gestion des catégories de produits.</p>
     <a href="{{ route('indexcategories') }}" class="btn-link">Gérer les catégories</a>
   </div>
+  @endrole
 
+  @role('admin')
   <div class="dashboard-section">
     <h2 class="section-title"><span class="icon">🔐</span> Rôles</h2>
     <p class="dashboard-info">Gestion des rôles utilisateurs.</p>
     <a href="{{ route('indexrole') }}" class="btn-link">Gérer les rôles</a>
+  </div>
+  @endrole
+  <div class="dashboard-section">
+    <h2 class="section-title"><span class="icon">💬</span>Commentaires</h2>
+<p class="dashboard-info">Gestion des commentaires et retours clients.</p>
+<a href="{{ route('indexcomment') }}" class="btn-link">Gérer les commentaires</a>
   </div>
 </div>
 @endsection
