@@ -73,8 +73,20 @@ public function indexpost()
 }
 public function indexcomment()
 {
-     $comments = Comment::latest()->take(10)->get();
-    return view('test02',compact('comments'));
+    $user = auth()->user();
+
+    if ($user && $user->role === 'admin') {
+        // L'admin voit tous les commentaires (les 10 derniers)
+        $comments = Comment::latest()->take(10)->get();
+    } elseif ($user) {
+        // Le client voit ses 10 derniers commentaires
+        $comments = Comment::where('user_id', $user->id)->latest()->take(10)->get();
+    } else {
+        // Personne n'est connecté → aucune donnée ou redirection
+        return redirect()->route('login');
+    }
+
+    return view('test02', compact('comments'));
 }
 public function indexclient()
 {
@@ -100,5 +112,9 @@ public function indexrole()
 {
    $clients = Client::with('roles')->get();
     return view('test07',compact('clients'));
+}
+public function twoauthenification()
+{
+    return view('test08');
 }
 }

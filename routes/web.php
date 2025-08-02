@@ -138,3 +138,4 @@ Route::get('dashboard/stock',[DashboardController::class,'indexstock'])->name('i
 Route::get('dashboard/like',[DashboardController::class,'indexlike'])->name('indexlike');
 Route::get('dashboard/categories',[DashboardController::class,'indexcategories'])->name('indexcategories');
 Route::get('dashboard/roles',[DashboardController::class,'indexrole'])->name('indexrole');
+Route::get('dashboard/twoauthenification',[DashboardController::class,'twoauthenification'])->name('twoauthenification');

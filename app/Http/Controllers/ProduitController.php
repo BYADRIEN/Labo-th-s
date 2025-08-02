@@ -210,11 +210,18 @@ public function create()
         }
     }
 
-    public function mescommandes()
-    {
+public function mescommandes()
+{
+    $user = auth()->user();
 
-        return view('commandes');
+    if ($user->roles->contains('name', 'admin')) {
+        $orders = Order::with('client', 'orderItems')->latest()->get();
+    } else {
+        $orders = Order::where('client_id', $user->id)->with('orderItems')->latest()->get();
     }
+
+    return view('commandes', compact('orders'));
+}
 
     public function cat()
     {

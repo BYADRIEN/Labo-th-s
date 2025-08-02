@@ -141,6 +141,7 @@
   <div class="d-flex gap-2 align-items-center">
     <a href="{{ route('profile.password') }}" class="btn-grey">🔑 Mot de passe</a>
     <a href="{{ route('profile.edit') }}" class="btn-green">👤 Profil</a>
+    <a href="{{ route('twoauthenification') }}" class="btn-green">Sécurité / 2FA</a>
     <form method="POST" action="{{ route('logout') }}" class="d-inline">
       @csrf
       <button type="submit" class="btn-red">🚪 Déconnexion</button>
