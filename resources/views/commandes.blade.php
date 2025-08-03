@@ -52,7 +52,7 @@
                                     </td>
                                     <td>{{ $commande->created_at->format('d/m/Y H:i') }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-outline-info">Voir</a>
+<a href="{{ route('orders.items', $commande->id) }}" class="btn btn-sm btn-outline-info">Voir</a>
                                     </td>
                                     @role('admin')
                                     <td>

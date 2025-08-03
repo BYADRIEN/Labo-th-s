@@ -17,4 +17,10 @@ class Orderitem extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Post::class); // ✅ Relation manquante
+    }
+
 }

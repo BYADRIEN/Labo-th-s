@@ -139,3 +139,5 @@ Route::get('dashboard/like',[DashboardController::class,'indexlike'])->name('ind
 Route::get('dashboard/categories',[DashboardController::class,'indexcategories'])->name('indexcategories');
 Route::get('dashboard/roles',[DashboardController::class,'indexrole'])->name('indexrole');
 Route::get('dashboard/twoauthenification',[DashboardController::class,'twoauthenification'])->name('twoauthenification');
+
+Route::get('/orders/{id}/items', [ProduitController::class, 'items'])->name('orders.items');

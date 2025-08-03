@@ -277,4 +277,10 @@ $category = Category::findOrFail($id);
 $category->delete();
 return redirect('dashboard');
 }
+public function items($id)
+{
+    $order = Order::with('orderItems.product')->findOrFail($id);
+
+    return view('items', compact('order'));
+}
 }
