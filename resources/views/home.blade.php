@@ -180,7 +180,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0">
-                    <img src="https://www.le-guide-sante.org/sites/default/files/styles/full_size_10_cols/public/resources/news/the-bienfaits-mefaits.jpg?itok=ILlT7kbT"
+                    <img src="https://images.pexels.com/photos/3619784/pexels-photo-3619784.jpeg"
                          alt="Galerie Labo des thés"
                          class="img-fluid rounded shadow-sm">
                 </div>

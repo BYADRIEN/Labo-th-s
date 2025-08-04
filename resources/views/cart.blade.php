@@ -26,8 +26,6 @@
                 </div>
             @endforeach
         </div>
-         {{-- Formulaire de validation de commande --}}
-         <p class="text-dark">total
       @php
     $total = 0;
 @endphp

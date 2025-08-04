@@ -202,6 +202,10 @@ public function create()
                     $orderitem->quantity = $details['quantity'];
                     $orderitem->price = $details['price'];
                     $orderitem->save();
+
+                     // 💥 Diminue automatiquement le stock
+        $product->stock -= $details['quantity'];
+        $product->save();
                 }
             }
             return redirect()->back()->with('success', 'success');
