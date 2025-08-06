@@ -16,6 +16,9 @@
                                 <th scope="col">État</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Détails</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Fullname</th>
+                                 <th scope="col">Phone</th>
                                 @role('admin')
                                 <th scope="col">Action</th>
                                 @endrole
@@ -53,6 +56,15 @@
                                     <td>{{ $commande->created_at->format('d/m/Y H:i') }}</td>
                                     <td>
 <a href="{{ route('orders.items', $commande->id) }}" class="btn btn-sm btn-outline-info">Voir</a>
+                                    </td>
+                                    <td>
+                                        {{ $commande->adress }}
+                                    </td>
+                                    <td>
+                                        {{ $commande->fullname }}
+                                    </td>
+                                    <td>
+                                        {{ $commande->phone }}
                                     </td>
                                     @role('admin')
                                     <td>

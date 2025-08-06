@@ -46,15 +46,19 @@ return view('profile.edit_client', compact('client'));
 }
 public function updateClientTraitement(Request $request)
 {$request->validate([
-    'id' => 'required|exists:client,id',
+    'id' => 'required|exists:clients,id',
     'nom' => 'required',
     'prenom' => 'required',
     'email' => 'required|email',
+     'adress' => 'nullable|string|max:255',
+    'phone' => 'nullable|string|max:20',
 ]);
 $client = Client::find($request->id);
 $client->nom = $request->nom;
 $client->prenom = $request->prenom;
 $client->email = $request->email;
+$client->adress = $request->adress;
+$client->phone = $request->phone;
 $client->update();
 return redirect('dashboard');
 }

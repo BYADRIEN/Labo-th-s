@@ -22,7 +22,15 @@
             <label for="email" class="form-label">Email</label>
             <input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" required class="form-control">
         </div>
+<div class="mb-3">
+    <label for="adress" class="form-label">Adresse</label>
+    <input id="adress" type="text" name="adress" value="{{ old('adress', auth()->user()->adress) }}" class="form-control">
+</div>
 
+<div class="mb-3">
+    <label for="phone" class="form-label">Téléphone</label>
+    <input id="phone" type="text" name="phone" value="{{ old('phone', auth()->user()->phone) }}" class="form-control">
+</div>
         <button type="submit" class="btn btn-primary">Mettre à jour</button>
     </form>
 </div>

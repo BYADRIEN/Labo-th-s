@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('type')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->text('adress');
+            $table->text('fullname');
+            $table->text('phone');
             $table->timestamps();
         });
     }

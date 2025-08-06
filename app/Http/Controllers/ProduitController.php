@@ -9,6 +9,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Support\Str;
+use App\Models\Client;
 
 // Ajoute ça en haut du fichier si pas déjà
 
@@ -186,6 +187,13 @@ public function create()
     {
 
         if (auth()->check()) {
+
+ $client = auth()->user();  // <--- Voilà l’étape qui manque !
+/** @var \App\Models\Client $client */
+        $client->adress = $data->input('adress');
+        $client->phone = $data->input('phone');
+        $client->save();
+
             $order = new Order();
             $order->status = "pending";
             $order->client_id = auth()->user()->id;

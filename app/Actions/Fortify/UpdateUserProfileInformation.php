@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\Client; // Modifiez si nécessaire
+use App\Models\Client;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -12,10 +12,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
     public function update(Client $client, array $input): void
     {
-        // Validation des données
         Validator::make($input, [
-            'nom' => ['required', 'string', 'max:255'],       // Validation pour `nom`
-            'prenom' => ['required', 'string', 'max:255'],   // Validation pour `prenom`
+            'nom' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -23,18 +22,22 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'max:255',
                 Rule::unique('client')->ignore($client->id),
             ],
+            'adress' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
         ])->validateWithBag('updateProfileInformation');
 
-        // Vérifiez si l'utilisateur doit confirmer son e-mail
-        if ($input['email'] !== $client->email &&
-            $client instanceof MustVerifyEmail) {
+        if (
+            $input['email'] !== $client->email &&
+            $client instanceof MustVerifyEmail
+        ) {
             $this->updateVerifiedClient($client, $input);
         } else {
-            // Mise à jour des informations du client
             $client->forceFill([
-                'nom' => $input['nom'],       // Mise à jour de la colonne `nom`
-                'prenom' => $input['prenom'], // Mise à jour de la colonne `prenom`
+                'nom' => $input['nom'],
+                'prenom' => $input['prenom'],
                 'email' => $input['email'],
+                'adress' => $input['adress'] ?? null,
+                'phone' => $input['phone'] ?? null,
             ])->save();
         }
     }
@@ -45,6 +48,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'nom' => $input['nom'],
             'prenom' => $input['prenom'],
             'email' => $input['email'],
+            'adress' => $input['adress'] ?? null,
+            'phone' => $input['phone'] ?? null,
             'email_verified_at' => null,
         ])->save();
 
