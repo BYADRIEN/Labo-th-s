@@ -26,22 +26,19 @@
                 </div>
             @endforeach
         </div>
-      @php
+    @php
     $total = 0;
 @endphp
 
-@foreach ($cart as $id => $post)
+@foreach (session('cart') as $id => $post)
     @php
         $price = floatval(str_replace(',', '.', $post['price']));
         $quantity = intval($post['quantity']);
         $total += $price * $quantity;
     @endphp
 @endforeach
-
 <p class="text-dark">Total : {{ number_format($total, 2, ',', ' ') }} €</p>
 
-<p class="text-dark">Total : {{ number_format($total, 2, ',', ' ') }} €</p>
-         </p>
     <div class="card mt-5 shadow">
         <div class="card-header">
             <h4>✅ Finaliser la commande</h4>

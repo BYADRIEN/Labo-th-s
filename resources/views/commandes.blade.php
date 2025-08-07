@@ -18,7 +18,8 @@
                                 <th scope="col">Détails</th>
                                 <th scope="col">Adresse</th>
                                 <th scope="col">Fullname</th>
-                                 <th scope="col">Phone</th>
+                                 <th scope="col">Telephone</th>
+                                 <th scope="col">Prix</th>
                                 @role('admin')
                                 <th scope="col">Action</th>
                                 @endrole
@@ -65,6 +66,9 @@
                                     </td>
                                     <td>
                                         {{ $commande->phone }}
+                                    </td>
+                                    <td>
+                                        {{ $commande->price}} €
                                     </td>
                                     @role('admin')
                                     <td>

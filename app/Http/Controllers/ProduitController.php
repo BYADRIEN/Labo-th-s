@@ -200,6 +200,17 @@ public function create()
             $order->adress = $data->input('adress');
             $order->fullname = $data->input('fullname');
             $order->phone = $data->input('phone');
+
+ // 💸 Calculer le total de la commande
+        $cart = session()->get('cart', []);
+        $total = 0;
+        foreach ($cart as $item) {
+            $price = floatval(str_replace(',', '.', $item['price']));
+            $quantity = intval($item['quantity']);
+            $total += $price * $quantity;
+        }
+        $order->price = $total;
+
             if ($order->save()) {
                 $cart = session()->get('cart', []);
                 foreach ($cart as $id => $details) {

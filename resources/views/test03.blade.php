@@ -19,6 +19,8 @@
               <th>Nom</th>
               <th>Prénom</th>
               <th>Email</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -29,6 +31,8 @@
                 <td>{{ $client->nom }}</td>
                 <td>{{ $client->prenom }}</td>
                 <td>{{ $client->email }}</td>
+                <td>{{ $client->adress }}</td>
+                <td>{{ $client->phone }}</td>
                 <td>
                   <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning me-2">Éditer</a>
                   <form action="{{ route('delete_client', $client->id)}} " method="POST" style="display:inline-block;" onsubmit="return confirm('Confirmer la suppression ?');">

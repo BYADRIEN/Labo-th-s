@@ -46,7 +46,7 @@ return view('profile.edit_client', compact('client'));
 }
 public function updateClientTraitement(Request $request)
 {$request->validate([
-    'id' => 'required|exists:clients,id',
+    'id' => 'required|exists:client,id',
     'nom' => 'required',
     'prenom' => 'required',
     'email' => 'required|email',
