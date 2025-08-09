@@ -111,7 +111,19 @@
     color: white;
 }
     </style>
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+    </div>
+@endif
 
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+    </div>
+@endif
     <section class="hero-section section-verte p-5">
     <div class="container text-center bg-overlay p-4 rounded">
         <h1>Bienvenue sur Labo des thés !</h1>

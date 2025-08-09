@@ -39,9 +39,13 @@
                 </div>
 
                 {{-- Ajout au panier --}}
-                <form action="{{ route('addbook.to.cart', $post->id) }}" method="GET" class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-dark">🛒 Ajouter au panier</button>
-                </form>
+@if($post->stock > 0)
+    <form action="{{ route('addbook.to.cart', $post->id) }}" method="GET" class="d-flex align-items-center">
+        <button type="submit" class="btn btn-dark">🛒 Ajouter au panier</button>
+    </form>
+@else
+    <span class="badge bg-danger">Plus disponible</span>
+@endif
             </div>
         </div>
         <form action="{{ url("{$post->path()}/comments") }}" method="POST" class="mt-4">

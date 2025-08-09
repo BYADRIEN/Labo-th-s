@@ -227,7 +227,9 @@ public function create()
         $product->save();
                 }
             }
-            return redirect()->back()->with('success', 'success');
+                session()->forget('cart');
+
+                return redirect('/')->with('success', 'Merci pour votre achat !');
         } else {
             return redirect()->route('login');
         }

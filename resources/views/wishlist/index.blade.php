@@ -30,6 +30,10 @@
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm">Retirer de la wishlist</button>
                         </form>
+                        <a href="{{ route('produit.show', $item->id) }}" 
+   class="btn btn-dark btn-sm mt-2 w-100 d-flex align-items-center justify-content-center">
+    <i class="bi bi-eye me-2"></i> Voir l'article
+</a>
                     </div>
                 </div>
             </div>
