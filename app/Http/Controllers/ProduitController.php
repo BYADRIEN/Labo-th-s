@@ -178,10 +178,18 @@ public function create()
 }
 
 
-    public function bookCart()
+  public function bookCart()
 {
     $cart = session()->get('cart', []);
-    return view('cart', compact('cart'));
+
+    // Récupérer le client connecté
+    $client = auth()->user();
+
+    // Récupérer ses commandes (par exemple toutes ses commandes, ou la dernière)
+$commande = Order::where('client_id', $client->id)->latest()->first();
+
+
+    return view('cart', compact('cart', 'client', 'commande'));
 }
     public function checkout(Request $data)
     {
@@ -307,5 +315,16 @@ public function items($id)
     $order = Order::with('orderItems.product')->findOrFail($id);
 
     return view('items', compact('order'));
+}
+public function deleteBookTocart($id)
+{
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$id])) {
+        unset($cart[$id]);
+        session()->put('cart', $cart);
+    }
+
+    return redirect()->back()->with('success', 'Article supprimé du panier.');
 }
 }

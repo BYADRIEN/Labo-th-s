@@ -90,6 +90,7 @@ Route::get('/add-to-cart/{id}', [ProduitController::class, 'addBooktoCart'])->na
 Route::put('/update-cart/{id}', [ProduitController::class, 'updateBookToCart'])->name('update.to.cart');
 Route::get('shopping-cart', [ProduitController::class, 'bookCart'])->name('shopping.cart');
 Route::get('/checkout', [ProduitController::class, 'checkout'])->name('checkout');
+Route::get('/delete-update-cart/{id}',[ProduitController::class, 'deleteBookTocart'])->name('delete.book.to.cart');
 
 // Permissions et rôles
 Route::resource('permissions', PermissionController::class);
