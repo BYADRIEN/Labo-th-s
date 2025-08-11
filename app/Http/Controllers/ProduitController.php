@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Support\Str;
 use App\Models\Client;
+use App\Models\Comment; // à mettre en haut du fichier
+
 
 // Ajoute ça en haut du fichier si pas déjà
 
@@ -327,5 +329,13 @@ public function deleteBookTocart($id)
     }
 
     return redirect()->back()->with('success', 'Article supprimé du panier.');
+}
+
+public function deleteComment($id)
+{
+    $comment = Comment::findOrFail($id);
+    $comment->delete();
+
+    return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
 }
 }

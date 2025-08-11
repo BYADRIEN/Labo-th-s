@@ -126,6 +126,10 @@ Route::put('categories/{id}', [ProduitController::class, 'updatecategory'])->nam
 Route::delete('categories/{id}', [ProduitController::class, 'destroy'])->name('categories.delete');
 Route::get('/comments/{comment}/edit', [DashboardController::class, 'edit'])->name('comment.edit');
 Route::put('/comments/{comment}', [DashboardController::class, 'update'])->name('comment.update');
+Route::delete('/comments/{id}', [ProduitController::class, 'deleteComment'])->name('comment.delete');
+
+
+
 
 Route::get('/update-client/{id}', [DashboardController::class,'updateClient'])->name('client.edit');
 Route::post('update/traitement', [DashboardController::class,'updateClientTraitement'])->name('updateClientTraitement');
