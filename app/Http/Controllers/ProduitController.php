@@ -54,7 +54,7 @@ public function create()
         'price' => 'required|numeric|min:0',
         'img' => 'required|image|max:2048',
         'poids' => 'nullable|integer|min:0',
-        'montant_tva' => 'nullable|numeric|min:0|max:100',
+        //'montant_tva' => 'nullable|numeric|min:0|max:100',
         'category_id' => 'required|exists:categories,id',
     ]);
 
@@ -65,7 +65,8 @@ public function create()
     $post->stock = $validated['stock'];
     $post->price = $validated['price'];
     $post->poids = $validated['poids'] ?? null;
-    $post->montant_tva = $validated['montant_tva'] ?? null;
+    // Calcul automatique de la TVA (6%)
+    $post->montant_tva = round($post->price * 0.06, 2);
     $post->category_id = $validated['category_id'];
 
     if ($request->hasFile('img')) {
@@ -101,7 +102,7 @@ public function create()
         }
 
         $posts->poids = $request->input('poids');
-        $posts->montant_tva = $request->input('montant_tva');
+         $posts->montant_tva = round($posts->price * 0.06, 2);
         $posts->category_id = $request->input('category_id');
 
         $posts->save();

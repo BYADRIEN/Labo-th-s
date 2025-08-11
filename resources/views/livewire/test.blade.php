@@ -55,7 +55,7 @@
                   <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid product-img" alt="{{ $post->title }}">
                     <div class="card-body">
                         <p class="card-title fw-bold">{{ $post->title }}</p>
-                        <p class="card-text">{{ $post->price }} €</p>
+    <p><strong>Prix TTC :</strong> {{ number_format($post->price + $post->montant_tva, 2, ',', ' ') }} €</p>
                         <a class="btn btn-dark" href="{{ route('produit.show', $post->id) }}">Voir l'article</a><br>
                     </div>
                 </div>

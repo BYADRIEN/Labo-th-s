@@ -44,13 +44,6 @@
             @error('poids') <div class="text-danger">{{ $message }}</div> @enderror
         </div>
 
-        {{-- Champ Montant TVA --}}
-        <div class="mb-3">
-            <label for="montant_tva" class="form-label">Montant TVA</label>
-            <input type="number" name="montant_tva" id="montant_tva" class="form-control" step="0.01" placeholder="montant_tva" value="{{ old('montant_tva', $posts->montant_tva ?? '') }}">
-            @error('montant_tva') <div class="text-danger">{{ $message }}</div> @enderror
-        </div>
-
         {{-- Champ Catégorie --}}
         <div class="mb-3">
             <label for="category_id" class="form-label">Catégorie</label>

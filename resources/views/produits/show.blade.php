@@ -29,14 +29,15 @@
                 </form>
 
                 {{-- Infos produit --}}
-                <div class="p-3 mb-3 bg-light rounded border">
-                    <p><strong>Description :</strong><br>{{ $post->content }}</p>
-                    <p><strong>Catégorie :</strong> {{ $post->category->catname }}</p>
-                    <p><strong>Stock :</strong> {{ $post->stock }} paquets</p>
-                    <p><strong>Poids :</strong> {{ $post->poids }} grammes</p>
-                    <p><strong>Prix :</strong> {{ $post->price }} €</p>
-                    <p><strong>Montant TVA :</strong> {{ $post->montant_tva }} €</p>
-                </div>
+              <div class="p-3 mb-3 bg-light rounded border">
+    <p><strong>Description :</strong><br>{{ $post->content }}</p>
+    <p><strong>Catégorie :</strong> {{ $post->category->catname }}</p>
+    <p><strong>Stock :</strong> {{ $post->stock }} paquets</p>
+    <p><strong>Poids :</strong> {{ $post->poids }} grammes</p>
+    <p><strong>Prix HT :</strong> {{ number_format($post->price, 2, ',', ' ') }} €</p>
+    <p><strong>Montant TVA (6%) :</strong> {{ number_format($post->montant_tva, 2, ',', ' ') }} €</p>
+    <p><strong>Prix TTC :</strong> {{ number_format($post->price + $post->montant_tva, 2, ',', ' ') }} €</p>
+</div>
 
                 {{-- Ajout au panier --}}
 @if($post->stock > 0)
