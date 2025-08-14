@@ -74,11 +74,13 @@
                                     <td>
                                         <form action="{{ route('admin.change_status', $commande->id)}}" method="post">
                                             @csrf
-                                            <select name="status" id="">
-                                                <option name="{{ $commande->status }}" id="">{{ $commande->status }}</option>
-                                                <option name="Delivered" >Delivered</option>
-                                                <option name="pending" >Pending</option>
-                                            </select>
+                                            <select name="status">
+    <option value="pending" {{ $commande->status == 'pending' ? 'selected' : '' }}>Pending</option>
+    <option value="approved" {{ $commande->status == 'approved' ? 'selected' : '' }}>Approved</option>
+    <option value="shipped" {{ $commande->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+    <option value="completed" {{ $commande->status == 'completed' ? 'selected' : '' }}>Completed</option>
+    <option value="cancelled" {{ $commande->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+</select>
                                             <input type="submit" name="submit" value="submit" onclick="return confirm('are you sure')">
                                         </form>
                                     </td>

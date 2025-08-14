@@ -11,6 +11,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Support\Str;
 use App\Models\Client;
 use App\Models\Comment; // à mettre en haut du fichier
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 
 
 // Ajoute ça en haut du fichier si pas déjà
@@ -180,17 +182,19 @@ public function create()
     return redirect()->back()->with('success', 'Quantité mise à jour');
 }
 
-
-  public function bookCart()
+public function bookCart()
 {
     $cart = session()->get('cart', []);
 
-    // Récupérer le client connecté
+    // Vérifier si un utilisateur est connecté
+    if (!auth()->check()) {
+        return redirect()->route('login')->with('error', 'Veuillez vous connecter pour voir votre panier.');
+    }
+
     $client = auth()->user();
 
-    // Récupérer ses commandes (par exemple toutes ses commandes, ou la dernière)
-$commande = Order::where('client_id', $client->id)->latest()->first();
-
+    // Récupérer ses commandes (la plus récente par exemple)
+    $commande = Order::where('client_id', $client->id)->latest()->first();
 
     return view('cart', compact('cart', 'client', 'commande'));
 }
@@ -237,6 +241,8 @@ $commande = Order::where('client_id', $client->id)->latest()->first();
         $product->stock -= $details['quantity'];
         $product->save();
                 }
+                 // 📧 Envoi de l'email au client
+    $this->sendOrderInformation($order);
             }
                 session()->forget('cart');
 
@@ -337,5 +343,14 @@ public function deleteComment($id)
     $comment->delete();
 
     return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
+}
+public function sendOrderInformation($order)
+{
+    // On récupère l'email du client lié à la commande
+    $email = $order->client->email ?? null;
+
+    if ($email) {
+        Mail::to($email)->send(new OrderMail($order));
+    }
 }
 }

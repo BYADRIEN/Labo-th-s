@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Fortify\Fortify;
+use App\Models\Order;
+use App\Observers\OrderObserver;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -29,5 +31,7 @@ class AppServiceProvider extends ServiceProvider
         //Fortify::loginView(function () {
         //    return view('auth.login');
         //});
+            Order::observe(OrderObserver::class);
+
     }
 }

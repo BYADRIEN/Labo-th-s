@@ -69,7 +69,7 @@
                         <input type="text" name="adress" class="form-control" 
                             value="{{ old('adress', $client->adress ?? '') }}" required>
                     </div>
-                    <button type="submit" name="checkout" class="btn btn-success">Procéder au paiement</button>
+                    <button type="submit" name="checkout" class="btn btn-success">Procéder au click and collect</button>
                 </form>
             </div>
         </div>
