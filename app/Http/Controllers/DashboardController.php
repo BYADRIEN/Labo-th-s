@@ -79,14 +79,21 @@ public function indexcomment()
 {
     $user = auth()->user();
 
-    if ($user && $user->role === 'admin') {
-        // L'admin voit tous les commentaires (les 10 derniers)
-        $comments = Comment::latest()->take(10)->get();
+    if ($user && $user->roles->contains('name', 'admin')) {
+        // L'admin voit tous les commentaires
+        $comments = Comment::with(['client', 'post'])
+                           ->latest()
+                           ->take(10)
+                           ->get();
     } elseif ($user) {
-        // Le client voit ses 10 derniers commentaires
-        $comments = Comment::where('user_id', $user->id)->latest()->take(10)->get();
+        // Le client voit seulement ses commentaires
+        $comments = Comment::with(['client', 'post'])
+                           ->where('client_id', $user->id)
+                           ->latest()
+                           ->take(10)
+                           ->get();
     } else {
-        // Personne n'est connecté → aucune donnée ou redirection
+        // Personne connecté → redirection
         return redirect()->route('login');
     }
 
@@ -104,7 +111,9 @@ public function indexstock()
 }
 public function indexlike()
 {
-     $posts = Post::withCount('likes')->get(); // 👈
+     $posts = Post::withCount('likes') // récupère le nombre de likes
+             ->orderByDesc('likes_count') // tri décroissant
+             ->get();
        return view('test05',compact('posts'));
 }
 public function indexcategories()
