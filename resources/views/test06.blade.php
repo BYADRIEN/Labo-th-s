@@ -25,7 +25,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nom de la catégorie</th>
-                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,18 +32,6 @@
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td class="fw-semibold">{{ $category->catname }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-outline-warning me-2" title="Éditer">
-                                           Modifier
-                                        </a>
-                                        <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Voulez-vous vraiment supprimer cette catégorie ?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Supprimer">
-                                                Suprimer
-                                            </button>
-                                        </form>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

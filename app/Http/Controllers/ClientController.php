@@ -120,4 +120,20 @@ class ClientController extends Controller
 
         return redirect()->route('users.index')->with('success', 'Rôle mis à jour avec succès.');
     }
+   public function updateStatus($client_id, $status_code)
+{
+    try {
+        $update_user = Client::whereId($client_id)->update([
+            'status' => $status_code
+        ]);
+
+        if ($update_user) {
+            return redirect()->route('users.index')->with('success', 'Statut mis à jour avec succès.');
+        } else {
+            return redirect()->route('users.index')->with('error', 'Impossible de mettre à jour le statut.');
+        }
+    } catch (\Exception $e) {
+        return redirect()->route('users.index')->with('error', 'Une erreur est survenue : '.$e->getMessage());
+    }
+}
 }

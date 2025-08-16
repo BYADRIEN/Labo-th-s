@@ -8,7 +8,9 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4 text-dark">Connexion</h2>
-                        
+                        @if(session('error'))
+                        <span class="text-danger"> {{ session('error') }}</span>
+                        @endif
                         <form method="POST" action="{{ route('login.post') }}">
                             @csrf
 

@@ -38,16 +38,19 @@
                                     <td>{{ $client->adress }}</td>
                                     <td>{{ $client->phone }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning me-2" title="Éditer">
-                                            Modifier
-                                        </a>
-                                        <form action="{{ route('delete_client', $client->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Confirmer la suppression ?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
-                                            Suprimer
-                                            </button>
-                                        </form>
+                      @if($client->status == 1)
+    <a href="{{ route('users.status.update', ['client_id' => $client->id, 'status_code' => 0]) }}"
+       class="btn btn-sm btn-warning me-2"
+       title="Bloquer">
+        Bloquer
+    </a>
+@else
+    <a href="{{ route('users.status.update', ['client_id' => $client->id, 'status_code' => 1]) }}"
+       class="btn btn-sm btn-success me-2"
+       title="Débloquer">
+        Débloquer
+    </a>
+@endif
                                     </td>
                                 </tr>
                             @endforeach

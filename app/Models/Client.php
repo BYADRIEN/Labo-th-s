@@ -28,7 +28,8 @@ class Client extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'adress',
-        'phone'
+        'phone',
+        'status'
     ];
 
     //public function posts()

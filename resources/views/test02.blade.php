@@ -33,11 +33,6 @@
                                     <p class="text-secondary fst-italic mb-0">{{ $comment->body }}</p>
                                 </div>
                                 <div class="d-flex flex-column gap-2">
-                                    @if ($comment->post)
-                                        <a href="{{ route('comment.edit', $comment->id) }}" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil"></i> Éditer
-                                        </a>
-                                    @endif
                                     <form action="{{ route('comment.delete', $comment->id) }}" method="POST" onsubmit="return confirm('Supprimer ce commentaire ?')">
                                         @csrf
                                         @method('DELETE')

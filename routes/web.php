@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Client;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Page d'accueil publique
@@ -146,3 +147,4 @@ Route::get('dashboard/roles',[DashboardController::class,'indexrole'])->name('in
 Route::get('dashboard/twoauthenification',[DashboardController::class,'twoauthenification'])->name('twoauthenification');
 
 Route::get('/orders/{id}/items', [ProduitController::class, 'items'])->name('orders.items');
+Route::get('/client/status/{client_id}/{status_code}', [ClientController::class, 'updateStatus'])->name('users.status.update');
