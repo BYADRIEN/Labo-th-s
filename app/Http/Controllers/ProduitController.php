@@ -362,4 +362,16 @@ public function sendOrderInformation($order)
         Mail::to($email)->send(new OrderMail($order));
     }
 }
+public function updateStock(Request $request, $id)
+{
+    $request->validate([
+        'stock' => 'required|integer|min:0',
+    ]);
+
+    $product = Post::findOrFail($id);
+    $product->stock = $request->stock;
+    $product->save();
+
+    return redirect()->back()->with('success', 'Stock mis à jour avec succès.');
+}
 }

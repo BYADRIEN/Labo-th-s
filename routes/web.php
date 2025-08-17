@@ -148,3 +148,4 @@ Route::get('dashboard/twoauthenification',[DashboardController::class,'twoauthen
 
 Route::get('/orders/{id}/items', [ProduitController::class, 'items'])->name('orders.items');
 Route::get('/client/status/{client_id}/{status_code}', [ClientController::class, 'updateStatus'])->name('users.status.update');
+Route::put('/stock/{id}', [ProduitController::class, 'updateStock'])->name('update.stock');

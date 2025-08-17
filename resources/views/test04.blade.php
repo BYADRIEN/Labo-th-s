@@ -19,6 +19,7 @@
                             <th>Produit</th>
                             <th class="text-center">Stock</th>
                             <th class="text-center">Statut</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,18 @@
                                             <i class="bi bi-check-circle-fill me-1"></i> OK
                                         </span>
                                     @endif
+                                </td>
+                            <td>
+                                   
+    <form action="{{ route('update.stock', $post->id) }}" method="POST" class="d-flex justify-content-center align-items-center gap-2">
+        @csrf
+        @method('PUT')
+        <input type="number" name="stock" value="{{ $post->stock }}" min="0" class="form-control form-control-sm w-50 text-center">
+        <button type="submit" class="btn btn-sm btn-primary">
+           modifier
+        </button>
+    </form>
+
                                 </td>
                             </tr>
                         @empty
