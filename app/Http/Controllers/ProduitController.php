@@ -252,15 +252,24 @@ public function bookCart()
         }
     }
 
-public function mescommandes()
+public function mescommandes(Request $request)
 {
     $user = auth()->user();
+    $status = $request->query('status'); // Récupère le paramètre GET 'status'
 
-    if ($user->roles->contains('name', 'admin')) {
-        $orders = Order::with('client', 'orderItems')->latest()->get();
-    } else {
-        $orders = Order::where('client_id', $user->id)->with('orderItems')->latest()->get();
+    $query = Order::query();
+
+    // Admin peut voir toutes les commandes
+    if (!$user->roles->contains('name', 'admin')) {
+        $query->where('client_id', $user->id);
     }
+
+    // Filtrer par status si défini
+    if ($status) {
+        $query->where('status', $status);
+    }
+
+    $orders = $query->with('client', 'orderItems')->latest()->get();
 
     return view('commandes', compact('orders'));
 }

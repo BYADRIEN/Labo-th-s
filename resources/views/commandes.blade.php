@@ -1,11 +1,18 @@
 @extends('welcome')
-
 @section('content')
 <div class="container mt-5">
     <div class="card shadow-sm">
-        <div class="card-header bg-success text-white">
-            <h4 class="mb-0">Mes Commandes</h4>
-        </div>
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Mes Commandes</h4>
+    <form method="GET" action="{{ route('commandes') }}" class="mb-0">
+        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm">
+            <option value="">Toutes les commandes</option>
+            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>En cours</option>
+            <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Terminées</option>
+            <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Annulées</option>
+        </select>
+    </form>
+</div>
         <div class="card-body">
             @if(isset($orders) && $orders->isNotEmpty())
                 <div class="table-responsive">
