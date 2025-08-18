@@ -44,7 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Home protégé (optionnel, tu peux enlever si redondant)
-    Route::get('/home', [HomeController::class, 'homeindex'])->name('home');
+    //Route::get('/home', [HomeController::class, 'homeindex'])->name('home');
 
     // Profil
     Route::view('/profil/edit', 'profile.edit')->name('profile.edit');
@@ -54,9 +54,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/client/commandes', [ProduitController::class, 'mescommandes'])->name('commandes');
 
     // Post commentaires (auth requis)
-    Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
+    //Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])->name('comments.store');
 });
-
+Route::middleware(['auth'])->group(function () {
+    Route::post('/posts/{post}/comments', [\App\Http\Controllers\Posts\CommentsController::class, 'store'])
+        ->name('comments.store');
+});
 // Routes produits publiques et sécurisées
 Route::get('/produits', [ProduitController::class, 'index'])->name('produits');
 //Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produit.show');
