@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\ContactUs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GalleryController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\DashboardController;
 use App\Models\Client;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
+
 
 // Page d'accueil publique
 Route::get('/', [HomeController::class, 'homeindex'])->name('home');
@@ -152,3 +155,7 @@ Route::get('dashboard/twoauthenification',[DashboardController::class,'twoauthen
 Route::get('/orders/{id}/items', [ProduitController::class, 'items'])->name('orders.items');
 Route::get('/client/status/{client_id}/{status_code}', [ClientController::class, 'updateStatus'])->name('users.status.update');
 Route::put('/stock/{id}', [ProduitController::class, 'updateStock'])->name('update.stock');
+use App\Http\Controllers\ContactUsController;
+
+Route::get('/contact', [ContactUsController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactUsController::class, 'send'])->name('contact.send');
