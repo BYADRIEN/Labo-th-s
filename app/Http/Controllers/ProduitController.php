@@ -186,17 +186,15 @@ public function bookCart()
 {
     $cart = session()->get('cart', []);
 
-    // Vérifier si un utilisateur est connecté
-    if (!auth()->check()) {
-        return redirect()->route('login')->with('error', 'Veuillez vous connecter pour voir votre panier.');
+    // Si l'utilisateur est connecté → on lui envoie ses infos et sa commande
+    if (auth()->check()) {
+        $client = auth()->user();
+        $commande = Order::where('client_id', $client->id)->latest()->first();
+        return view('cart', compact('cart', 'client', 'commande'));
     }
 
-    $client = auth()->user();
-
-    // Récupérer ses commandes (la plus récente par exemple)
-    $commande = Order::where('client_id', $client->id)->latest()->first();
-
-    return view('cart', compact('cart', 'client', 'commande'));
+    // Sinon → juste afficher le panier (sans info client/commande)
+    return view('cart', compact('cart'));
 }
     public function checkout(Request $data)
     {

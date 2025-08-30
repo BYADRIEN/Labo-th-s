@@ -88,7 +88,7 @@ public function indexcomment()
     } elseif ($user) {
         // Le client voit seulement ses commentaires
         $comments = Comment::with(['client', 'post'])
-                           ->where('client_id', $user->id)
+                           ->where('user_id', $user->id)
                            ->latest()
                            ->take(10)
                            ->get();
