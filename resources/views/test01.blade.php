@@ -41,6 +41,9 @@
                                             </button>
                                         </form>
                                     </div>
+                                    <div>
+<livewire:buttons.featured :post="$post" :name="'featured'" :key="'featured'.$post->id"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

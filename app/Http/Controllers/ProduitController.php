@@ -24,7 +24,7 @@ use App\Mail\OrderMail;
 class ProduitController extends Controller
 {
     //
-    public function index()
+       public function index()
     {
         // Récupérer les posts avec le filtre 'title' et la relation 'category'
         $posts = QueryBuilder::for(Post::class)
