@@ -25,16 +25,23 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nom de la catégorie</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($categories as $category)
-                                <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td class="fw-semibold">{{ $category->catname }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                       <tbody>
+    @foreach ($categories as $category)
+        <tr>
+            <td>{{ $category->id }}</td>
+            <td class="fw-semibold">{{ $category->catname }}</td>
+            <td>
+                <a href="{{ route('categories.edit', $category->id) }}" 
+                   class="btn btn-sm btn-warning">
+                    Modifier
+                </a>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
                     </table>
                 </div>
             @endif

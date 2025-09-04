@@ -61,7 +61,17 @@
                                         @endphp
                                         <span class="{{ $statusClass }}">{{ ucfirst($commande->status) }}</span>
                                     </td>
-                                    <td>{{ $commande->created_at->format('d/m/Y H:i') }}</td>
+                                    <td>
+    @php
+        $jours = \Carbon\Carbon::parse($commande->created_at)->diffInDays(now());
+    @endphp
+
+    @if($jours >= 5 && $commande->status !== 'completed')
+        <span class="text-danger fw-bold">{{ $commande->created_at->format('d/m/Y H:i') }}</span>
+    @else
+        {{ $commande->created_at->format('d/m/Y H:i') }}
+    @endif
+</td>
                                     <td>
 <a href="{{ route('orders.items', $commande->id) }}" class="btn btn-sm btn-outline-info">Voir</a>
                                     </td>
