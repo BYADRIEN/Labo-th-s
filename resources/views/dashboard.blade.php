@@ -88,18 +88,18 @@
 </style>
 
 <div class="container py-4">
-  <h1 class="dashboard-title">📊 Tableau de bord Administrateur</h1>
+  <h1 class="dashboard-title"><i class="fa-solid fa-table-columns"></i>    Tableau de bord Administrateur</h1>
 
   @auth('client')
   <div class="alert-success">
     <div>Connecté en tant que <strong>{{ auth('client')->user()->prenom }} {{ auth('client')->user()->nom }}</strong></div>
     <div class="action-buttons">
-      <a href="{{ route('profile.password') }}" class="btn-grey">🔑 Mot de passe</a>
-      <a href="{{ route('profile.edit') }}" class="btn-green">👤 Profil</a>
+      <a href="{{ route('profile.password') }}" class="btn-grey"><i class="fa-solid fa-key"></i>  Mot de passe</a>
+      <a href="{{ route('profile.edit') }}" class="btn-green"><i class="fa-regular fa-user"></i>  Profil</a>
       <a href="{{ route('twoauthenification') }}" class="btn-green">Sécurité / 2FA</a>
       <form method="POST" action="{{ route('logout') }}" class="d-inline">
         @csrf
-        <button type="submit" class="btn-red">🚪 Déconnexion</button>
+        <button type="submit" class="btn-red"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
       </form>
     </div>
   </div>
@@ -107,14 +107,14 @@
 
   {{-- Sections (toutes responsive, s’empilent bien en mobile) --}}
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">🛒</span> Commandes récentes</h2>
+    <h2 class="section-title"><i class="fa-solid fa-cart-shopping"></i> Commandes récentes</h2>
     <p class="dashboard-info">Visualisez les dernières commandes passées par vos clients.</p>
     <a href="{{ route('commandes') }}" class="btn-link">Voir les commandes</a>
   </div>
 
   @role('admin')
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">🫖</span> Produits en stock</h2>
+    <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> Produits en stock</h2>
     <p class="dashboard-info">Suivez l’inventaire de vos thés disponibles.</p>
     <a href="{{ route('indexstock') }}" class="btn-link">Voir le stock</a>
   </div>
@@ -122,7 +122,7 @@
 
   @role('admin')
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">📦</span> Produits du magasin</h2>
+    <h2 class="section-title"><i class="fa-solid fa-warehouse"></i> Produits du magasin</h2>
     <p class="dashboard-info">Ajout, modification, suppression des produits.</p>
     <a href="{{ route('indexpost') }}" class="btn-link">Gérer les produits</a>
   </div>
@@ -130,7 +130,7 @@
 
   @role('admin')
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">👥</span> Clients enregistrés</h2>
+    <h2 class="section-title"><i class="fa-solid fa-users"></i> Clients enregistrés</h2>
     <p class="dashboard-info">Liste des amateurs de thé fidèles à votre boutique.</p>
     <a href="{{ route('indexclient') }}" class="btn-link">Voir les clients</a>
   </div>
@@ -138,7 +138,7 @@
 
   @role('admin')
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">❤️</span> Likes</h2>
+    <h2 class="section-title"><i class="fa-solid fa-heart"></i> Likes</h2>
     <p class="dashboard-info">Avis et retours de vos clients sur vos produits.</p>
     <a href="{{ route('indexlike') }}" class="btn-link">Voir les likes</a>
   </div>
@@ -146,7 +146,7 @@
 
   @role('admin')
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">📂</span> Catégories</h2>
+    <h2 class="section-title"><i class="fa-solid fa-layer-group"></i>Catégories</h2>
     <p class="dashboard-info">Gestion des catégories de produits.</p>
     <a href="{{ route('indexcategories') }}" class="btn-link">Gérer les catégories</a>
   </div>
@@ -154,14 +154,14 @@
 
   @role('admin')
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">🔐</span> Rôles</h2>
+    <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Rôles</h2>
     <p class="dashboard-info">Gestion des rôles utilisateurs.</p>
     <a href="{{ route('indexrole') }}" class="btn-link">Gérer les rôles</a>
   </div>
   @endrole
 
   <div class="dashboard-section">
-    <h2 class="section-title"><span class="icon">💬</span> Commentaires</h2>
+    <h2 class="section-title"><i class="fa-solid fa-comment"></i>Commentaires</h2>
     <p class="dashboard-info">Gestion des commentaires et retours clients.</p>
     <a href="{{ route('indexcomment') }}" class="btn-link">Gérer les commentaires</a>
   </div>
