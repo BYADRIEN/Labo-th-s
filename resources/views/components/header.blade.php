@@ -68,7 +68,7 @@
   <div class="container">
     <a class="navbar-brand-custom text-decoration-none d-flex align-items-center gap-2" href="{{ route('home') }}">
       <i class="fa-solid fa-mug-saucer text-success"></i>
-      Labo des Thés
+      Labo des thés
     </a>
 
     <!-- Burger button -->

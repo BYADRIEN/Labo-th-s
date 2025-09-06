@@ -2,60 +2,100 @@
 
 @section('content')
 <div id="posts" class="container my-5">
-    <div class="card shadow-lg border-0">
-        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <i class="bi bi-tags-fill me-2 fs-4"></i>
-                <h4 class="mb-0">Gestion des Produits</h4>
-            </div>
-            <a href="{{ route('produits.create') }}" class="btn btn-light btn-sm rounded-pill px-3">
-                <i class="bi bi-plus-circle me-1"></i> Ajouter un produit
+    <div class="bg-white rounded-4 shadow-lg p-4">
+        
+        {{-- Header --}}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold text-success m-0">
+                <i class="fas fa-seedling me-2"></i> Gestion des Produits
+            </h3>
+            <a href="{{ route('produits.create') }}" 
+               class="btn btn-success rounded-pill px-4 shadow-sm">
+                <i class="fas fa-plus me-2"></i> Nouveau Produit
             </a>
         </div>
-        <div class="card-body">
-            @if($posts->isEmpty())
-                <div class="alert alert-info text-center">
-                    <i class="bi bi-info-circle me-1"></i> Aucun produit trouvé.
-                </div>
-            @else
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    @foreach($posts as $post)
-                        <div class="col">
-                            <div class="card h-100 shadow-sm border-light">
+
+        {{-- Body --}}
+        @if($posts->isEmpty())
+            <div class="alert alert-light border text-center p-4 rounded-3 shadow-sm">
+                <i class="fas fa-info-circle me-2 text-success"></i> Aucun produit trouvé.
+            </div>
+        @else
+            <div class="row g-4">
+                @foreach($posts as $post)
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden product-card">
+                            {{-- Image --}}
+                            <div class="position-relative">
                                 <img src="{{ asset('storage/' . $post->img) }}"
-                                     class="card-img-top"
                                      alt="{{ $post->title }}"
-                                     style="height: 200px; object-fit: cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-primary fw-semibold">{{ $post->title }}</h5>
-                                    <div class="mt-auto d-flex gap-2">
-                                        <a href="{{ url('edit/' . $post->id) }}" class="btn btn-warning btn-sm rounded-pill flex-grow-1">
-                                            <i class="bi bi-pencil-square me-1"></i> Modifier
-                                        </a>
-                                        <form action="{{ url('delete/' . $post->id) }}" method="POST" class="flex-grow-1">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm rounded-pill w-100"
-                                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
-                                                <i class="bi bi-trash me-1"></i> Supprimer
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div>
-<livewire:buttons.featured :post="$post" :name="'featured'" :key="'featured'.$post->id"/>
-                                    </div>
+                                     class="w-100"
+                                     style="height: 220px; object-fit: cover;">
+                                
+                                {{-- Badge stock --}}
+                                @if($post->stock < 2)
+                                    <span class="badge bg-danger position-absolute top-0 start-0 m-2 px-3 py-2 rounded-pill">
+                                        <i class="fas fa-exclamation-circle"></i> Rupture
+                                    </span>
+                                @else
+                                    <span class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-2 rounded-pill">
+                                        <i class="fas fa-check"></i> En stock
+                                    </span>
+                                @endif
+                            </div>
+
+                            {{-- Infos produit --}}
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="fw-bold text-dark">
+                                    <i class="fas fa-mug-hot text-success me-1"></i> {{ $post->title }}
+                                </h5>
+
+                                <p class="text-muted small">ID: {{ $post->id }}</p>
+
+                                {{-- Actions --}}
+                                <div class="mt-auto d-flex justify-content-between gap-2">
+                                    <a href="{{ url('edit/' . $post->id) }}" 
+                                       class="btn btn-outline-success btn-sm rounded-pill flex-grow-1">
+                                        <i class="fas fa-pen me-1"></i> Modifier
+                                    </a>
+                                    <form action="{{ url('delete/' . $post->id) }}" method="POST" class="flex-grow-1">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" 
+                                                class="btn btn-outline-danger btn-sm rounded-pill w-100"
+                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                            <i class="fas fa-trash me-1"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </div>
+
+                                {{-- Livewire bouton --}}
+                                <div class="mt-3">
+                                    <livewire:buttons.featured :post="$post" :name="'featured'" :key="'featured'.$post->id"/>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            @endif
-        </div>
-        <div class="card-footer text-end">
-            <a href="{{ route('produits') }}" class="btn btn-secondary">
-                <i class="bi bi-arrow-left-circle me-1"></i> Retour aux produits
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        {{-- Footer --}}
+        <div class="text-end mt-4">
+            <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary rounded-pill shadow-sm">
+                <i class="fas fa-arrow-left me-2"></i> Retour à la Dashboard
             </a>
         </div>
     </div>
 </div>
+
+{{-- Effet hover CSS --}}
+<style>
+.product-card img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover img {
+    transform: scale(1.05);
+}
+</style>
 @endsection

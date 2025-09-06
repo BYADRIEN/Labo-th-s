@@ -68,7 +68,7 @@
   }
 
   .btn-link { background-color: #4e6a2f; color: #fff; }
-  .btn-link:hover { background-color: #3e5720; }
+  .btn-link:hover { background-color: #8aa82f ; color: #fff !important;}
 
   .btn-grey { background-color: #e0e0e0; color: #3b4a2a; }
   .btn-grey:hover { background-color: #d5d5d5; }
