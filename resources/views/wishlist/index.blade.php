@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container py-5">
-    <h1 class="text-center mb-5 fw-bold" style="font-family: 'Playfair Display', serif;">Ma Wishlist</h1>
+   <h1 class="text-center mb-5 fw-bold" style="font-family: 'Playfair Display', serif;">
+    <i class="fas fa-star text-warning me-2"></i> Ma Wishlist
+</h1>
 
     {{-- Alerts --}}
     @foreach (['success', 'info', 'warning'] as $msg)

@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container py-5">
-    <h2 class="mb-4 text-center text-dark fw-bold" style="font-family: 'Playfair Display', serif;">
-        🛒 Ma commande
-    </h2>
-
+<h2 class="mb-4 text-dark fw-bold" style="font-family: 'Playfair Display', serif;">
+    <i class="fas fa-shopping-cart text-success me-2"></i> Ma commande
+</h2>
     @if(session('cart') && count(session('cart')) > 0)
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach(session('cart') as $id => $post)

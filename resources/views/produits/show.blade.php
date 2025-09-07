@@ -2,7 +2,18 @@
 
 @section('content')
 <div class="container py-5">
-
+@if(session('success'))
+    <div class="alert alert-success rounded-pill px-4 py-2 mb-4 position-relative pe-5" role="alert">
+        <i class="fa-solid fa-circle-check me-2"></i>
+        {{ session('success') }}
+        <button
+            type="button"
+            class="btn-close position-absolute top-50 end-0 translate-middle-y me-3"
+            data-bs-dismiss="alert"
+            aria-label="Fermer">
+        </button>
+    </div>
+@endif
     {{-- Bouton retour --}}
     <div class="mb-4">
         <a class="btn btn-outline-success rounded-pill px-4" href="{{ route('produits') }}">
