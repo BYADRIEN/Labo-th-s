@@ -73,7 +73,7 @@ public function destroyClient($id)
 public function indexpost()
 {
     $posts = Post::all();
-    return view('test01',compact('posts'));
+    return view('index_2.test01',compact('posts'));
 }
 public function indexcomment()
 {
@@ -97,37 +97,37 @@ public function indexcomment()
         return redirect()->route('login');
     }
 
-    return view('test02', compact('comments'));
+    return view('index_2.test02', compact('comments'));
 }
 public function indexclient()
 {
     $clients = Client::all();
-    return view('test03',compact('clients'));
+    return view('index_2.test03',compact('clients'));
 }
 public function indexstock()
 {
      $posts = Post::all();
-    return view('test04',compact('posts'));
+    return view('index_2.test04',compact('posts'));
 }
 public function indexlike()
 {
      $posts = Post::withCount('likes') // récupère le nombre de likes
              ->orderByDesc('likes_count') // tri décroissant
              ->get();
-       return view('test05',compact('posts'));
+       return view('index_2.test05',compact('posts'));
 }
 public function indexcategories()
 {
     $categories = Category::all();
-    return view('test06',compact('categories'));
+    return view('index_2.test06',compact('categories'));
 }
 public function indexrole()
 {
    $clients = Client::with('roles')->get();
-    return view('test07',compact('clients'));
+    return view('index_2.test07',compact('clients'));
 }
 public function twoauthenification()
 {
-    return view('test08');
+    return view('index_2.test08');
 }
 }
