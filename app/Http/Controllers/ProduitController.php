@@ -293,16 +293,20 @@ public function mescommandes(Request $request)
         $path = $file->store('upload');
     }
     public function categoryvie()
-    {
-        $categories = Category::all();
-        return view('produits.category_2', compact('categories'));
-    }
-    public function changeStatus(Request $request, $id){
-        $order = Order::findOrFail($id);
-        $order->status=$request->status;
-        $order->save();
-        return redirect()->back();
-    }
+{
+    $categories = Category::all();
+    return view('produits.category_2', compact('categories'));
+} // <-- ici on ferme bien la fonction
+
+public function changeStatus(Request $request, $id)
+{
+   $order = Order::findOrFail($id);
+
+    $order->status = $request->status;
+   $order->save();
+
+    return redirect()->back();
+}
    public function updatecategory(Request $request, $id)
 {
     $category = Category::findOrFail($id);
