@@ -10,6 +10,11 @@
     font-weight: bold;
     color: #2e7d32;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    transition: color 0.3s ease;
+  }
+
+  .navbar-brand-custom:hover {
+    color: #4e342e; /* brun au hover */
   }
 
   .nav-link-custom {
@@ -22,8 +27,8 @@
 
   .nav-link-custom:hover,
   .nav-link-custom:focus {
-    background-color: rgba(255,255,255,0.2);
-    color: #ffffff !important;
+    background-color: rgba(78, 52, 46, 0.15); /* brun clair au hover */
+    color: #4e342e !important; /* texte brun */
     text-decoration: none;
   }
 
@@ -33,12 +38,13 @@
     justify-content: center;
     color: #2e7d32;
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.3s ease;
     padding: 0.2rem;
   }
 
   .nav-icon-container:hover {
     transform: scale(1.1);
+    color: #4e342e; /* brun au hover */
   }
 
   .nav-icon-container .fas,

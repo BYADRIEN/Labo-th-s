@@ -1,10 +1,10 @@
 @extends('welcome')
 @section('content')
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .edu-vic {
-            font-family: 'Edu VIC WA NT Beginner', sans-serif;
-        }
-
+    font-family: 'Kalam', cursive; /* texte principal */
+      }
         body {
             background-color: #f8f5f0;
             color: #212121;
@@ -125,11 +125,17 @@
     </div>
 @endif
     <section class="hero-section section-verte p-5">
-    <div class="container text-center bg-overlay p-4 rounded">
-        <h1>Bienvenue sur Labo des thés !</h1>
+
+    <section class="hero-section section-verte p-5 text-center rounded" style="min-height:450px; display:flex; align-items:center; justify-content:center; background: url('https://images.unsplash.com/photo-1510626176961-4b13f9b9f0d0?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat; color:white; text-shadow:1px 1px 6px rgba(0,0,0,0.6);">
+<div class="container p-4" style="background-color: rgba(60, 40, 20, 0.6); border-radius:12px;">
+        <h1 class="fw-bold edu-vic">Bienvenue sur Labo des thés !</h1>
         <p class="fw-bold mb-3">Commandez en ligne, récupérez sur place</p>
-        <p class="lead">Labo des thés, votre boutique belge de thé en <strong>Click & Collect</strong>. Explorez nos thés en ligne, passez commande, puis récupérez-les en toute simplicité !</p>
+        <p class="lead">
+            Labo des thés, votre boutique belge de thé en <strong>Click & Collect</strong>. Explorez nos thés en ligne, passez commande, puis récupérez-les en toute simplicité !
+        </p>
+        <a href="{{ route('produits') }}" class="btn btn-light mt-3">Découvrir nos thés</a>
     </div>
+</section>
 </section>
 <section class="section-verte py-5">
     <div class="container">
@@ -167,7 +173,7 @@
                          class="img-fluid rounded shadow-sm">
                 </div>
                 <div class="col-md-6">
-                    <h2 class="fw-bold mb-3 text-dark">Notre passion du thé</h2>
+                    <h2 class="fw-bold mb-3 text-dark edu-vic">Notre passion du thé</h2>
                     <p class="text-muted">
                         Chez <strong>Labo des thés</strong>, chaque tasse raconte une histoire. Nous sélectionnons des thés de qualité, issus de traditions millénaires, pour vous offrir des moments de calme, de bien-être et de découverte.
                     </p>
@@ -182,7 +188,7 @@
 
     <section class="py-5 text-center text-white section-verte">
         <div class="container py-5">
-            <h2 class="display-5 fw-bold">Découvrez nos thés</h2>
+            <h2 class="display-5 fw-bold edu-vic">Découvrez nos thés</h2>
             <p class="lead">Thés verts, noirs, infusions et plus encore... Pour tous les goûts et tous les moments.</p>
             <a href="{{ route('produits') }}" class="btn btn-outline-light mt-3">Parcourir la boutique</a>
         </div>
@@ -197,7 +203,7 @@
                          class="img-fluid rounded shadow-sm">
                 </div>
                 <div class="col-md-6">
-                    <h2 class="fw-bold mb-3 text-dark">Plongez dans notre univers</h2>
+                    <h2 class="fw-bold mb-3 text-dark edu-vic">Plongez dans notre univers</h2>
                     <p class="text-muted">
                         Découvrez la richesse de notre boutique à travers notre galerie photos. Entre thés sélectionnés, moments de dégustation et ateliers, laissez-vous inspirer.
                     </p>

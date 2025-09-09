@@ -4,7 +4,10 @@
 <div class="container py-5">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center mb-4">🫖 Détails de la commande n°{{ $order->id }}</h2>
+            <h2 class="card-title text-center mb-4">
+    <i class="fa-solid fa-mug-hot text-success"></i> 
+    Détails de la commande n°{{ $order->id }}
+</h2>
 
             <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle text-center">
@@ -26,8 +29,8 @@
             </div>
             <div class="text-center mt-4">
                 <a href="{{ route('commandes')}}" class="btn btn-outline-success">
-                    ← Retour à mes commandes
-                </a>
+    <i class="fa-solid fa-arrow-left"></i> Retour à mes commandes
+</a>
             </div>
         </div>
     </div>

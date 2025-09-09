@@ -10,17 +10,51 @@
 
 <div class="container py-5">
     <div class="row g-4">
-        @foreach(range(1,8) as $i)
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="card shadow-sm border-0">
-                    <img src="https://images.pexels.com/photos/4150916/pexels-photo-4150916.jpeg" 
-                         class="card-img-top img-fluid rounded" alt="Image {{$i}}">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Image du magasin</h6>
-                    </div>
+
+        <!-- Première image -->
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <img src="https://images.pexels.com/photos/6826026/pexels-photo-6826026.jpeg" 
+                     class="card-img-top img-fluid rounded" alt="Photo 1">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Salon dégustation de votre thé</h6>
                 </div>
             </div>
-        @endforeach
+        </div>
+
+        <!-- Deuxième image -->
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <img src="https://images.pexels.com/photos/2147149/pexels-photo-2147149.jpeg" 
+                     class="card-img-top img-fluid rounded" alt="Photo 2">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Vitrine du magasin</h6>
+                </div>
+            </div>
+        </div>
+
+        <!-- Troisième image -->
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <img src="https://images.pexels.com/photos/7772022/pexels-photo-7772022.jpeg" 
+                     class="card-img-top img-fluid rounded" alt="Photo 3">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Vos commandes prêtes à être expédiées</h6>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ajoute autant d'images que tu veux en copiant ce bloc -->
+ <!-- Troisième image -->
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <img src="https://images.pexels.com/photos/7772120/pexels-photo-7772120.jpeg" 
+                     class="card-img-top img-fluid rounded" alt="Photo 3">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Préparation de vos commandes</h6>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
